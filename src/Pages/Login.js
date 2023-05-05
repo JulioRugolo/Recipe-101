@@ -9,6 +9,11 @@ function Login(props) {
 
   const { history } = props;
 
+  //   const handleSubmit = () => {
+  //     history.push('/meals');
+  //     localStorage.setItem('user', email);
+  //   };
+
   const isButtonValid = password.length > number6 && validateEmail(email);
 
   return (
@@ -33,7 +38,10 @@ function Login(props) {
           type="button"
           data-testid="login-submit-btn"
           disabled={ !isButtonValid }
-          onClick={ () => history.push('/meals') }
+          onClick={ () => {
+            history.push('/meals');
+            localStorage.setItem('user', JSON.stringify({ email }));
+          } }
         >
           Logar
         </button>
