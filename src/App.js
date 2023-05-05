@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom/cjs/react-router-
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Pages/Login';
+import Recipes from './Pages/Recipes';
 
 function App() {
   return (
@@ -12,6 +13,11 @@ function App() {
           exact
           path="/"
           component={ Login }
+        />
+        <Route
+          exact
+          path="/meals"
+          component={ Recipes }
         />
       </Switch>
     </BrowserRouter>

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { number0, number6 } from '../services/consts';
+import PropTypes from 'prop-types';
+import { number6, regexValidation } from '../services/consts';
 
-function Login() {
+function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  //   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const isButtonValid = password.length > number6 && email.length > number0;
+  const validateEmail = (mail) => (!!regexValidation.test(mail));
+
+  const { history } = props;
+
+  const isButtonValid = password.length > number6 && validateEmail(email);
 
   return (
     <main className="loginPage">
@@ -30,7 +33,7 @@ function Login() {
           type="button"
           data-testid="login-submit-btn"
           disabled={ !isButtonValid }
-          onClick={ useHistory('/recipes') }
+          onClick={ () => history.push('/meals') }
         >
           Logar
         </button>
@@ -38,5 +41,11 @@ function Login() {
     </main>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+}.isRequired;
 
 export default Login;
