@@ -1,14 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import AppProvider from './Context/AppProvider';
+import AppProvider from './context/AppProvider';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './Pages/Login';
-import Recipes from './Pages/Recipes';
-import Drinks from './Pages/Drinks';
-import Profile from './Pages/Profile';
-import DoneRecipes from './Pages/DoneRecipes';
-import FavoriteRecipes from './Pages/FavoriteRecipes';
+import Login from './pages/Login';
+import Recipes from './pages/Recipes';
+import Drinks from './pages/Drinks';
+import Profile from './pages/Profile';
+import DoneRecipes from './pages/DoneRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes';
+import MealsDetails from './components/MealsDetails';
 
 function App() {
   return (
@@ -24,6 +25,16 @@ function App() {
             exact
             path="/meals"
             component={ Recipes }
+          />
+          <Route
+            exact
+            path="/meals/:id"
+            component={ MealsDetails }
+          />
+          <Route
+            exact
+            path="/drinks/:id"
+            component={ MealsDetails }
           />
           <Route
             exact

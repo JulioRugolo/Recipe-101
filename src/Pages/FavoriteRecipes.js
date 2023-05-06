@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
+import AppContext from '../context/AppContext';
 
-function FavoriteRecipes() {
+function FavoritesRecipes() {
+  const { setTitle, setFavoriteOrProfile } = useContext(AppContext);
+  useEffect(() => {
+    setTitle('Favorite Recipes');
+    setFavoriteOrProfile(true);
+  });
   return (
-    <Header title="Favorite Recipes" />
+    <Header />
   );
 }
 
-export default FavoriteRecipes;
+export default FavoritesRecipes;

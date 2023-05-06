@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
+import AppContext from '../context/AppContext';
 
-function RecipesDone() {
+function DoneRecipes() {
+  const { setTitle, setFavoriteOrProfile } = useContext(AppContext);
+  useEffect(() => {
+    setTitle('Done Recipes');
+    setFavoriteOrProfile(true);
+  });
   return (
-    <div>
-      <Header title="Done Recipes" />
-    </div>
+    <Header />
   );
 }
 
-export default RecipesDone;
+export default DoneRecipes;
