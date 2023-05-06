@@ -7,7 +7,6 @@ function AppProvider({ children }) {
   const [favoriteOrProfile, setFavoriteOrProfile] = useState(false);
   const [controlInput, setControlInput] = useState('');
   const [dataApi, setDataApi] = useState([]);
-  const [url, setUrl] = useState(null);
 
   const values = useMemo(() => ({
     title,
@@ -18,11 +17,9 @@ function AppProvider({ children }) {
     setControlInput,
     dataApi,
     setDataApi,
-    url,
-    setUrl,
   }), [title, setTitle, favoriteOrProfile,
     setFavoriteOrProfile, controlInput, setControlInput,
-    dataApi, setDataApi, url, setUrl]);
+    dataApi, setDataApi]);
 
   return (
     <AppContext.Provider value={ values }>

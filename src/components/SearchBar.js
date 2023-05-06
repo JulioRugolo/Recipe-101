@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import AppContext from '../context/AppContext';
 
 function SearchBar() {
-  const { controlInput, setDataApi } = useContext(AppContext);
+  const { title, controlInput, setDataApi } = useContext(AppContext);
   const [type, setType] = useState('');
 
   const fetchApi = async (endpoint) => {
@@ -13,12 +13,22 @@ function SearchBar() {
   };
 
   const handleClick = () => {
-    if (type === 'ingredient') {
-      fetchApi(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${controlInput}`);
+    if (title === 'Meals') {
+      if (type === 'ingredient') {
+        fetchApi(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${controlInput}`);
+      } else if (type === 'name') {
+        fetchApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${controlInput}`);
+      } else if (type === 'firstletter' && controlInput.length === 1) {
+        fetchApi(`https://www.themealdb.com/api/json/v1/1/search.php?f=${controlInput}`);
+      } else {
+        global.alert('Your search must have only 1 (one) character');
+      }
+    } else if (type === 'ingredient') {
+      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${controlInput}`);
     } else if (type === 'name') {
-      fetchApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${controlInput}`);
+      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${controlInput}`);
     } else if (type === 'firstletter' && controlInput.length === 1) {
-      fetchApi(`https://www.themealdb.com/api/json/v1/1/search.php?f=${controlInput}`);
+      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${controlInput}`);
     } else {
       global.alert('Your search must have only 1 (one) character');
     }
@@ -29,7 +39,6 @@ function SearchBar() {
       <div>
         <label>
           <input
-            // onClick={ () => setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${controlInput}`) }
             onClick={ (e) => setType(e.target.id) }
             id="ingredient"
             name="radioSearch"
