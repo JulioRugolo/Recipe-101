@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
+import SearchBar from '../components/SearchBar';
 
 function Recipes() {
   const { setTitle } = useContext(AppContext);
@@ -8,7 +9,10 @@ function Recipes() {
     setTitle('Meals');
   });
   return (
-    <Header />
+    <>
+      <Header />
+      <SearchBar />
+    </>
   );
 }
 
