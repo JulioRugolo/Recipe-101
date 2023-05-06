@@ -28,4 +28,27 @@ describe('Testa a página Login', () => {
       expect(history.location.pathname).toBe('/meals');
     });
   });
+  test('testa o component header na pagina meals', () => {
+    renderWithRouter(<App />);
+    const profileButton = screen.getByTestId('profile-top-btn');
+    const searchButton = screen.getByTestId('search-top-btn');
+    expect(profileButton).toBeInTheDocument();
+    expect(searchButton).toBeInTheDocument();
+  });
+  test('testa se ao clicar no botão de search, o input search é renderizado na tela', () => {
+    renderWithRouter(<App />);
+    const searchButton = screen.getByTestId('search-top-btn');
+    userEvent.click(searchButton);
+    const searchInput = screen.getByTestId('search-input');
+    expect(searchInput).toBeInTheDocument();
+  });
+  test('testa se ao clicar no botão de profile, a pagina Profile é renderizada', () => {
+    const { history } = renderWithRouter(<App />);
+    const profileButton = screen.getByTestId('profile-top-btn');
+    userEvent.click(profileButton);
+    act(() => {
+      history.push('/profile');
+      expect(history.location.pathname).toBe('/profile');
+    });
+  });
 });
