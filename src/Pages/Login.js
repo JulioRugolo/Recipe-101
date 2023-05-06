@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { number6, regexValidation } from '../services/consts';
+import AppContext from '../Context/AppContext';
 
 function Login(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('teste@teste.com');
+  const [password, setPassword] = useState('1234567');
   const validateEmail = (mail) => (!!regexValidation.test(mail));
+  const { setTitle } = useContext(AppContext);
 
   const { history } = props;
 
@@ -41,6 +43,7 @@ function Login(props) {
           onClick={ () => {
             history.push('/meals');
             localStorage.setItem('user', JSON.stringify({ email }));
+            setTitle('Meals');
           } }
         >
           Logar
