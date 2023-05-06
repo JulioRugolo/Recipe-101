@@ -7,7 +7,8 @@ import AppContext from '../context/AppContext';
 import './style.css';
 
 function Header() {
-  const { title, favoriteOrProfile } = useContext(AppContext);
+  const { title, favoriteOrProfile, controlInput,
+    setControlInput } = useContext(AppContext);
   const history = useHistory();
   const [inputSearch, setInputSearch] = useState(false);
   return (
@@ -37,7 +38,13 @@ function Header() {
           )
         }
         {
-          inputSearch && <input data-testid="search-input" type="text" />
+          inputSearch && <input
+            name="controlInput"
+            value={ controlInput }
+            onChange={ ({ target }) => setControlInput(target.value) }
+            data-testid="search-input"
+            type="text"
+          />
         }
       </div>
     </header>
