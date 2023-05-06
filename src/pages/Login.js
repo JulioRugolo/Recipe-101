@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { number6, regexValidation } from '../services/consts';
 
 function Login(props) {
-  const [email, setEmail] = useState('teste@teste.com');
-  const [password, setPassword] = useState('1234567');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const validateEmail = (mail) => (!!regexValidation.test(mail));
 
   const { history } = props;
