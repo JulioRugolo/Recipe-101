@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import Header from '../components/Header';
+import Header from '../Components/Header';
 import AppContext from '../context/AppContext';
 
 function DoneRecipes() {

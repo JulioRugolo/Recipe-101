@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import Header from '../components/Header';
+import Header from '../Components/Header';
 import AppContext from '../context/AppContext';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../Components/SearchBar';
+import Footer from '../Components/Footer';
 
-function Drinks() {
+function Drinks(props) {
   const { setTitle } = useContext(AppContext);
   useEffect(() => {
     setTitle('Drinks');
@@ -12,6 +13,7 @@ function Drinks() {
     <>
       <Header />
       <SearchBar />
+      <Footer { ...props } />
     </>
   );
 }
