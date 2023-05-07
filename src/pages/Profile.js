@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../Components/Header';
+import Header from '../components/Header';
 import AppContext from '../context/AppContext';
-import Footer from '../Components/Footer';
+import Footer from '../components/Footer';
 
 function Profile(props) {
   const { setTitle, setFavoriteOrProfile } = useContext(AppContext);

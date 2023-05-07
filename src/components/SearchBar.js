@@ -2,33 +2,32 @@ import React, { useContext, useState } from 'react';
 import AppContext from '../context/AppContext';
 
 function SearchBar() {
-  const { title, controlInput, setDataApi } = useContext(AppContext);
+  const { title, controlInput, setUrl } = useContext(AppContext);
   const [type, setType] = useState('');
 
-  const fetchApi = async (endpoint) => {
-    const response = await fetch(endpoint);
-    const data = await response.json();
-    console.log(data);
-    setDataApi(data.meals);
-  };
+  // const fetchApi = async (endpoint) => {
+  //   const response = await fetch(endpoint);
+  //   const data = await response.json();
+  //   setDataApi(data.meals);
+  // };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (title === 'Meals') {
       if (type === 'ingredient') {
-        fetchApi(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${controlInput}`);
+        setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${controlInput}`);
       } else if (type === 'name') {
-        fetchApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${controlInput}`);
+        setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${controlInput}`);
       } else if (type === 'firstletter' && controlInput.length === 1) {
-        fetchApi(`https://www.themealdb.com/api/json/v1/1/search.php?f=${controlInput}`);
+        setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${controlInput}`);
       } else {
         global.alert('Your search must have only 1 (one) character');
       }
     } else if (type === 'ingredient') {
-      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${controlInput}`);
+      setUrl(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${controlInput}`);
     } else if (type === 'name') {
-      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${controlInput}`);
+      setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${controlInput}`);
     } else if (type === 'firstletter' && controlInput.length === 1) {
-      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${controlInput}`);
+      setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${controlInput}`);
     } else {
       global.alert('Your search must have only 1 (one) character');
     }
@@ -50,7 +49,6 @@ function SearchBar() {
         <label>
           <input
             onClick={ (e) => setType(e.target.id) }
-            // onChange={ () => setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${controlInput}`) }
             id="name"
             name="radioSearch"
             type="radio"
@@ -61,7 +59,6 @@ function SearchBar() {
         <label>
           <input
             onClick={ (e) => setType(e.target.id) }
-            // onChange={ () => setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${controlInput}`) }
             id="firstletter"
             name="radioSearch"
             type="radio"

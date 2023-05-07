@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import Header from '../Components/Header';
+import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 
 function FavoritesRecipes() {
@@ -9,7 +9,10 @@ function FavoritesRecipes() {
     setFavoriteOrProfile(true);
   });
   return (
-    <Header />
+    <>
+      <Header />
+      <h1 data-testid="title">title</h1>
+    </>
   );
 }
 

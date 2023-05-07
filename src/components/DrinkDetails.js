@@ -4,7 +4,7 @@ function DrinkDetails(props) {
   console.log(props);
   return (
     <div>
-      <h1>detalhes comida</h1>
+      <h1 data-testid="detail-title">detalhes comida</h1>
     </div>
   );
 }
