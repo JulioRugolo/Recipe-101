@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
+import './recipe.css';
 
 function Recipes(props) {
   const { setTitle, dataMeals } = useContext(AppContext);
@@ -15,7 +16,7 @@ function Recipes(props) {
   });
 
   return (
-    <>
+    <main className="recipeContainer">
       <Header />
       <SearchBar />
       <Footer { ...props } />
@@ -31,28 +32,35 @@ function Recipes(props) {
       >
         FavoriteRecipes
       </button>
+      <section className="cardContainer">
+        {dataMeals
+          ? dataMeals.map((meal, index) => {
+            if (dataMeals.length === 1) {
+              history.push(`/meals/${dataMeals[0].idMeal}`);
+            } else if (index < VALIDATE_ARRAY) {
+              return (
 
-      {dataMeals
-        ? dataMeals.map((meal, index) => {
-          if (dataMeals.length === 1) {
-            history.push(`/meals/${dataMeals[0].idMeal}`);
-          } else if (index < VALIDATE_ARRAY) {
-            return (
-              <div data-testid={ `${index}-recipe-card` } key={ meal.idMeal }>
-                <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
-                <img
-                  src={ meal.strMealThumb }
-                  width="100px"
-                  alt={ meal.strMeal }
-                  data-testid={ `${index}-card-img` }
-                />
-              </div>
-            );
-          }
-          return index;
-        }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
+                <div
+                  data-testid={ `${index}-recipe-card` }
+                  className="recipeCard"
+                  key={ meal.idMeal }
+                >
+                  <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
+                  <img
+                    src={ meal.strMealThumb }
+                    width="100px"
+                    alt={ meal.strMeal }
+                    data-testid={ `${index}-card-img` }
+                  />
+                </div>
 
-    </>
+              );
+            }
+            return console.log(index);
+          }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
+      </section>
+
+    </main>
   );
 }
 

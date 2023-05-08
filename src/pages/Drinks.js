@@ -15,30 +15,36 @@ function Drinks(props) {
   });
 
   return (
-    <>
+    <main className="recipeContainer">
       <Header />
       <SearchBar />
       <Footer { ...props } />
-      {dataDrinks
-        ? dataDrinks.map((meal, index) => {
-          if (dataDrinks.length === 1) {
-            history.push(`/drinks/${dataDrinks[0].idDrink}`);
-          } else if (index < VALIDATE_ARRAY) {
-            return (
-              <div data-testid={ `${index}-recipe-card` } key={ meal.idDrink }>
-                <p data-testid={ `${index}-card-name` }>{meal.strDrink}</p>
-                <img
-                  src={ meal.strDrinkThumb }
-                  width="100px"
-                  alt={ meal.strDrink }
-                  data-testid={ `${index}-card-img` }
-                />
-              </div>
-            );
-          }
-          return index;
-        }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
-    </>
+      <section className="cardContainer">
+        {dataDrinks
+          ? dataDrinks.map((meal, index) => {
+            if (dataDrinks.length === 1) {
+              history.push(`/drinks/${dataDrinks[0].idDrink}`);
+            } else if (index < VALIDATE_ARRAY) {
+              return (
+                <div
+                  data-testid={ `${index}-recipe-card` }
+                  key={ meal.idDrink }
+                  className="recipeCard"
+                >
+                  <p data-testid={ `${index}-card-name` }>{meal.strDrink}</p>
+                  <img
+                    src={ meal.strDrinkThumb }
+                    width="100px"
+                    alt={ meal.strDrink }
+                    data-testid={ `${index}-card-img` }
+                  />
+                </div>
+              );
+            }
+            return index;
+          }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
+      </section>
+    </main>
   );
 }
 
