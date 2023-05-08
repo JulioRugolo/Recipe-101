@@ -46,6 +46,8 @@ function AppProvider({ children }) {
     urlDrinks,
     initialDataMeals,
     initialDataDrinks,
+    setDataMeals,
+    setDataDrinks,
   }), [
     title,
     setTitle,
@@ -61,6 +63,8 @@ function AppProvider({ children }) {
     urlDrinks,
     initialDataMeals,
     initialDataDrinks,
+    setDataMeals,
+    setDataDrinks,
   ]);
 
   return (

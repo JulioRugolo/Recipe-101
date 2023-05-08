@@ -9,7 +9,11 @@ import FilterComponent from '../components/FilterComponent';
 const FILTER_NUMBER = 5;
 
 function Drinks(props) {
-  const { setTitle, dataDrinks } = useContext(AppContext);
+  const {
+    setTitle,
+    dataDrinks,
+    initialDataDrinks,
+    setDataDrinks } = useContext(AppContext);
   const { history } = props;
   const VALIDATE_ARRAY = 12;
 
@@ -35,6 +39,13 @@ function Drinks(props) {
         {categorys.map((category, index) => (
           index < FILTER_NUMBER && <FilterComponent { ...category } key={ index } />
         ))}
+        <button
+          data-testid="All-category-filter"
+          onClick={ () => setDataDrinks(initialDataDrinks) }
+        >
+          All
+
+        </button>
       </section>
       <section className="cardContainer">
         {dataDrinks

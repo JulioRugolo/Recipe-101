@@ -8,7 +8,7 @@ import './recipe.css';
 import FilterComponent from '../components/FilterComponent';
 
 function Recipes(props) {
-  const { setTitle, dataMeals } = useContext(AppContext);
+  const { setTitle, dataMeals, initialDataMeals, setDataMeals } = useContext(AppContext);
   const { history } = props;
   const VALIDATE_ARRAY = 12;
   const FILTER_NUMBER = 5;
@@ -24,7 +24,7 @@ function Recipes(props) {
     }
     fetchCategorys();
     setTitle('Meals');
-  });
+  }, [setTitle, setCategorys]);
 
   return (
     <main className="recipeContainer">
@@ -47,6 +47,13 @@ function Recipes(props) {
         {categorys.map((category, index) => (
           index < FILTER_NUMBER && <FilterComponent { ...category } key={ index } />
         ))}
+        <button
+          data-testid="All-category-filter"
+          onClick={ () => setDataMeals(initialDataMeals) }
+        >
+          All
+
+        </button>
       </section>
       <section className="cardContainer">
         {dataMeals
