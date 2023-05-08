@@ -9,6 +9,8 @@ function AppProvider({ children }) {
   const [urlMeals, setUrlMeals] = useState('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const [urlDrinks, setUrlDrinks] = useState('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   const [dataMeals, setDataMeals] = useState([]);
+  const [initialDataMeals, setInitialDataMeals] = useState([]);
+  const [initialDataDrinks, setInitialDataDrinks] = useState([]);
   const [dataDrinks, setDataDrinks] = useState([]);
 
   useEffect(() => {
@@ -16,12 +18,14 @@ function AppProvider({ children }) {
       const response = await fetch(urlMeals);
       const apiData = await response.json();
       setDataMeals(apiData.meals);
+      setInitialDataMeals(apiData.meals);
     };
 
     const fetchDrinks = async () => {
       const response = await fetch(urlDrinks);
       const apiData = await response.json();
       setDataDrinks(apiData.drinks);
+      setInitialDataDrinks(apiData.drinks);
     };
     fetchMeals();
     fetchDrinks();
@@ -40,6 +44,8 @@ function AppProvider({ children }) {
     urlMeals,
     setUrlDrinks,
     urlDrinks,
+    initialDataMeals,
+    initialDataDrinks,
   }), [
     title,
     setTitle,
@@ -53,6 +59,8 @@ function AppProvider({ children }) {
     urlMeals,
     setUrlDrinks,
     urlDrinks,
+    initialDataMeals,
+    initialDataDrinks,
   ]);
 
   return (

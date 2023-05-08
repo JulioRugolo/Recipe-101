@@ -1,17 +1,28 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
 import './recipe.css';
+import FilterComponent from '../components/FilterComponent';
 
 function Recipes(props) {
   const { setTitle, dataMeals } = useContext(AppContext);
   const { history } = props;
   const VALIDATE_ARRAY = 12;
+  const FILTER_NUMBER = 5;
+
+  const [categorys, setCategorys] = useState([]);
 
   useEffect(() => {
+    async function fetchCategorys() {
+      const url = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+      const response = await fetch(url);
+      const data = await response.json();
+      setCategorys(data.meals);
+    }
+    fetchCategorys();
     setTitle('Meals');
   });
 
@@ -32,6 +43,11 @@ function Recipes(props) {
       >
         FavoriteRecipes
       </button>
+      <section className="filters">
+        {categorys.map((category, index) => (
+          index < FILTER_NUMBER && <FilterComponent { ...category } key={ index } />
+        ))}
+      </section>
       <section className="cardContainer">
         {dataMeals
           ? dataMeals.map((meal, index) => {

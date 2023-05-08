@@ -1,16 +1,28 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
+import FilterComponent from '../components/FilterComponent';
+
+const FILTER_NUMBER = 5;
 
 function Drinks(props) {
   const { setTitle, dataDrinks } = useContext(AppContext);
   const { history } = props;
   const VALIDATE_ARRAY = 12;
 
+  const [categorys, setCategorys] = useState([]);
+
   useEffect(() => {
+    async function fetchCategorys() {
+      const url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+      const response = await fetch(url);
+      const data = await response.json();
+      setCategorys(data.drinks);
+    }
+    fetchCategorys();
     setTitle('Drinks');
   });
 
@@ -19,6 +31,11 @@ function Drinks(props) {
       <Header />
       <SearchBar />
       <Footer { ...props } />
+      <section className="filters">
+        {categorys.map((category, index) => (
+          index < FILTER_NUMBER && <FilterComponent { ...category } key={ index } />
+        ))}
+      </section>
       <section className="cardContainer">
         {dataDrinks
           ? dataDrinks.map((meal, index) => {
