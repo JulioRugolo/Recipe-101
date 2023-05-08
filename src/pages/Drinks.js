@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
@@ -6,19 +6,23 @@ import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
 
 function Drinks(props) {
-  const { dataApi } = useContext(AppContext);
+  const { setTitle, dataDrinks } = useContext(AppContext);
   const { history } = props;
   const VALIDATE_ARRAY = 12;
+
+  useEffect(() => {
+    setTitle('Drinks');
+  });
 
   return (
     <>
       <Header />
       <SearchBar />
       <Footer { ...props } />
-      {dataApi
-        ? dataApi.map((meal, index) => {
-          if (dataApi.length === 1) {
-            history.push(`/drinks/${dataApi[0].idDrink}`);
+      {dataDrinks
+        ? dataDrinks.map((meal, index) => {
+          if (dataDrinks.length === 1) {
+            history.push(`/drinks/${dataDrinks[0].idDrink}`);
           } else if (index < VALIDATE_ARRAY) {
             return (
               <div data-testid={ `${index}-recipe-card` } key={ meal.idDrink }>
@@ -31,11 +35,9 @@ function Drinks(props) {
                 />
               </div>
             );
-          } else {
-            // global.alert('Sorry, we haven\'t found any recipes for these filters.');
           }
           return index;
-        }) : <p>Carregando...</p>}
+        }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
     </>
   );
 }

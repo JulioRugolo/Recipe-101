@@ -6,7 +6,7 @@ import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
 
 function Recipes(props) {
-  const { setTitle, dataApi } = useContext(AppContext);
+  const { setTitle, dataMeals } = useContext(AppContext);
   const { history } = props;
   const VALIDATE_ARRAY = 12;
 
@@ -32,10 +32,10 @@ function Recipes(props) {
         FavoriteRecipes
       </button>
 
-      {dataApi
-        ? dataApi.map((meal, index) => {
-          if (dataApi.length === 1) {
-            history.push(`/meals/${dataApi[0].idMeal}`);
+      {dataMeals
+        ? dataMeals.map((meal, index) => {
+          if (dataMeals.length === 1) {
+            history.push(`/meals/${dataMeals[0].idMeal}`);
           } else if (index < VALIDATE_ARRAY) {
             return (
               <div data-testid={ `${index}-recipe-card` } key={ meal.idMeal }>
@@ -48,11 +48,9 @@ function Recipes(props) {
                 />
               </div>
             );
-          } else {
-            // global.alert('Sorry, we haven\'t found any recipes for these filters.');
           }
           return index;
-        }) : <p>Carregando...</p>}
+        }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
 
     </>
   );
