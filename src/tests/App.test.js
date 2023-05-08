@@ -5,6 +5,7 @@ import { act } from 'react-dom/test-utils';
 import App from '../App';
 import userTest from './mocks/user';
 import { renderWithRouter } from './helpers/renderWithRouter';
+// import Recipes from '../pages/Recipes';
 
 describe('Testa a página Login', () => {
   test('Testa se o botão começa desabilitado e fica habilitado após preencher o form', () => {

@@ -9,7 +9,10 @@ function FavoritesRecipes() {
     setFavoriteOrProfile(true);
   });
   return (
-    <Header />
+    <>
+      <Header />
+      <h1 data-testid="title">title</h1>
+    </>
   );
 }
 
