@@ -62,20 +62,21 @@ function Recipes(props) {
               history.push(`/meals/${dataMeals[0].idMeal}`);
             } else if (index < VALIDATE_ARRAY) {
               return (
-
-                <div
-                  data-testid={ `${index}-recipe-card` }
-                  className="recipeCard"
-                  key={ meal.idMeal }
-                >
-                  <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
-                  <img
-                    src={ meal.strMealThumb }
-                    width="100px"
-                    alt={ meal.strMeal }
-                    data-testid={ `${index}-card-img` }
-                  />
-                </div>
+                <a href={ `/meals/${meal.idMeal}` } key={ meal.idMeal }>
+                  <div
+                    data-testid={ `${index}-recipe-card` }
+                    className="recipeCard"
+                    key={ meal.idMeal }
+                  >
+                    <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
+                    <img
+                      src={ meal.strMealThumb }
+                      width="100px"
+                      alt={ meal.strMeal }
+                      data-testid={ `${index}-card-img` }
+                    />
+                  </div>
+                </a>
 
               );
             }
