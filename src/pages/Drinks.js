@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
@@ -6,12 +6,10 @@ import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
 
 function Drinks(props) {
-  const { setTitle, dataApi } = useContext(AppContext);
+  const { dataApi } = useContext(AppContext);
   const { history } = props;
   const VALIDATE_ARRAY = 12;
-  useEffect(() => {
-    setTitle('Drinks');
-  });
+
   return (
     <>
       <Header />
@@ -33,9 +31,11 @@ function Drinks(props) {
                 />
               </div>
             );
+          } else {
+            // global.alert('Sorry, we haven\'t found any recipes for these filters.');
           }
           return index;
-        }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
+        }) : <p>Carregando...</p>}
     </>
   );
 }

@@ -9,9 +9,11 @@ function Recipes(props) {
   const { setTitle, dataApi } = useContext(AppContext);
   const { history } = props;
   const VALIDATE_ARRAY = 12;
+
   useEffect(() => {
     setTitle('Meals');
   });
+
   return (
     <>
       <Header />
@@ -46,9 +48,11 @@ function Recipes(props) {
                 />
               </div>
             );
+          } else {
+            // global.alert('Sorry, we haven\'t found any recipes for these filters.');
           }
           return index;
-        }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
+        }) : <p>Carregando...</p>}
 
     </>
   );
