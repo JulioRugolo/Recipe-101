@@ -1,0 +1,17 @@
+.startRecipe {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+}
+
+.shareRecipe {
+  bottom: 0;
+  left: 150px;
+  position: fixed;
+}
+
+.favoriteRecipe {
+  bottom: 0;
+  left: 300px;
+  position: fixed;
+}

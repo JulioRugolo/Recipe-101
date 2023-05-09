@@ -45,7 +45,7 @@ function Profile(props) {
         Logout
 
       </button>
-      <Footer />
+      <Footer { ...props } />
     </>
   );
 }
