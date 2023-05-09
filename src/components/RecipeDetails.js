@@ -124,15 +124,15 @@ function RecipeDetails() {
               </button>
               <button
                 data-testid="share-btn"
+                className="shareRecipe"
               >
                 Compartilhar
-
               </button>
               <button
                 data-testid="favorite-btn"
+                className="favoriteRecipe"
               >
                 Favoritar
-
               </button>
             </div>
 
@@ -228,15 +228,15 @@ function RecipeDetails() {
               </button>
               <button
                 data-testid="share-btn"
+                className="shareRecipe"
               >
                 Compartilhar
-
               </button>
               <button
                 data-testid="favorite-btn"
+                className="favoriteRecipe"
               >
                 Favoritar
-
               </button>
             </div>
           );
