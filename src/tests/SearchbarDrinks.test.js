@@ -12,7 +12,7 @@ import mealsFilters from './mocks/filterMeals';
 const execSearchBtn = 'exec-search-btn';
 const searchTopBtn = 'search-top-btn';
 const searchInput = 'search-input';
-const urlFilters = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+const urlFilters = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
 describe('testa pagina meals', () => {
   beforeEach(() => {
@@ -55,18 +55,41 @@ describe('testa pagina meals', () => {
     userEvent.click(radioIngredient);
     userEvent.type(inputSearch, 'chicken');
     userEvent.click(searchButton);
+    const drinksButton = screen.getByTestId('drinks-bottom-btn');
+    expect(drinksButton).toBeInTheDocument();
+    userEvent.click(drinksButton);
+
+    act(() => {
+      history.push('/drinks');
+      expect(history.location.pathname).toBe('/drinks');
+    });
     expect(global.fetch).toBeCalledWith(urlFilters);
   });
   test('ao clicar no radio name', () => {
-    renderWithRouter(<App />);
-    const radioName = screen.getByText(/nome/i);
+    const { history } = renderWithRouter(<App />);
+    const drinksButton = screen.getByTestId('drinks-bottom-btn');
+    expect(drinksButton).toBeInTheDocument();
+    userEvent.click(drinksButton);
+
+    act(() => {
+      history.push('/drinks');
+      expect(history.location.pathname).toBe('/drinks');
+    });
+    const radioIngridient = screen.getByText(/Ingrediente/i);
     const enableInputButton = screen.getByTestId(searchTopBtn);
     const searchButton = screen.getByTestId(execSearchBtn);
-    userEvent.click(radioName);
+    userEvent.click(radioIngridient);
     userEvent.click(enableInputButton);
     const inputSearch = screen.getByTestId(searchInput);
-    userEvent.type(inputSearch, 'soup');
+    userEvent.type(inputSearch, 'vodka');
     userEvent.click(searchButton);
+
+    const radioName = screen.getByText(/Nome/i);
+    userEvent.click(radioName);
+    userEvent.click(enableInputButton);
+    userEvent.type(inputSearch, 'a');
+    userEvent.click(searchButton);
+    expect(global.fetch).toBeCalledTimes(16);
   });
   test('ao clicar no radio firstletter', () => {
     renderWithRouter(<App />);
