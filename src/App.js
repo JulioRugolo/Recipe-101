@@ -56,6 +56,16 @@ function App() {
             path="/favorite-recipes"
             component={ FavoriteRecipes }
           />
+          <Route
+            exact
+            path="/meals/:id/in-progress"
+            component={ RecipeInProgress }
+          />
+          <Route
+            exact
+            path="/drinks/:id/in-progress"
+            component={ RecipeInProgress }
+          />
         </Switch>
       </BrowserRouter>
     </AppProvider>
