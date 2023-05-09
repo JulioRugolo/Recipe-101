@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import './Startrecipe.css';
 
@@ -10,6 +10,8 @@ function RecipeDetails() {
   const location = useLocation();
   const RECOMENDATIONS_QUANTITY = 6;
   const inProgress = localStorage.getItem('inProgressRecipes');
+  const history = useHistory();
+  const START_RECIPES = 'Start Recipe';
 
   useEffect(() => {
     async function fetchRecipesMeals() {
@@ -110,8 +112,14 @@ function RecipeDetails() {
               <button
                 data-testid="start-recipe-btn"
                 className="startRecipe"
+                onClick={ ({ target }) => {
+                  if (target.innerHTML === START_RECIPES) {
+                    const idPage = location.pathname.split('/')[2];
+                    history.push(`/meals/${idPage}/in-progress`);
+                  }
+                } }
               >
-                {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+                {inProgress ? 'Continue Recipe' : START_RECIPES}
 
               </button>
             </div>
@@ -196,8 +204,14 @@ function RecipeDetails() {
               <button
                 data-testid="start-recipe-btn"
                 className="startRecipe"
+                onClick={ ({ target }) => {
+                  if (target.innerHTML === START_RECIPES) {
+                    const idPage = location.pathname.split('/')[2];
+                    history.push(`/drinks/${idPage}/in-progress`);
+                  }
+                } }
               >
-                {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+                {inProgress ? 'Continue Recipe' : START_RECIPES}
 
               </button>
             </div>
