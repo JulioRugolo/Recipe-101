@@ -2,16 +2,16 @@ import React, { useContext, useState } from 'react';
 import AppContext from '../context/AppContext';
 
 function SearchBar() {
-  const { controlInput, setUrlMeals } = useContext(AppContext);
+  const { controlInput, setUrlDrinks } = useContext(AppContext);
   const [type, setType] = useState('');
 
   const handleClick = async () => {
     if (type === 'ingredient') {
-      setUrlMeals(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${controlInput}`);
+      setUrlDrinks(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${controlInput}`);
     } else if (type === 'name') {
-      setUrlMeals(`https://www.themealdb.com/api/json/v1/1/search.php?s=${controlInput}`);
+      setUrlDrinks(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${controlInput}`);
     } else if (type === 'firstletter' && controlInput.length === 1) {
-      setUrlMeals(`https://www.themealdb.com/api/json/v1/1/search.php?f=${controlInput}`);
+      setUrlDrinks(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${controlInput}`);
     } else {
       global.alert('Your search must have only 1 (one) character');
     }

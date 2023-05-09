@@ -8,7 +8,13 @@ import './recipe.css';
 import FilterComponent from '../components/FilterComponent';
 
 function Recipes(props) {
-  const { setTitle, dataMeals, initialDataMeals, setDataMeals } = useContext(AppContext);
+  const { setTitle,
+    dataMeals,
+    initialDataMeals,
+    setDataMeals,
+    noFilters,
+    setNoFilters,
+  } = useContext(AppContext);
   const { history } = props;
   const VALIDATE_ARRAY = 12;
   const FILTER_NUMBER = 5;
@@ -49,7 +55,10 @@ function Recipes(props) {
         ))}
         <button
           data-testid="All-category-filter"
-          onClick={ () => setDataMeals(initialDataMeals) }
+          onClick={ () => {
+            setDataMeals(initialDataMeals);
+            setNoFilters(false);
+          } }
         >
           All
 
@@ -58,7 +67,7 @@ function Recipes(props) {
       <section className="cardContainer">
         {dataMeals
           ? dataMeals.map((meal, index) => {
-            if (dataMeals.length === 1) {
+            if (dataMeals.length === 1 && !noFilters) {
               history.push(`/meals/${dataMeals[0].idMeal}`);
             } else if (index < VALIDATE_ARRAY) {
               return (

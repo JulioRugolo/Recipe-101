@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/SearchBarDrinks';
 import Footer from '../components/Footer';
 import FilterComponent from '../components/FilterComponent';
 

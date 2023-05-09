@@ -12,6 +12,7 @@ function AppProvider({ children }) {
   const [initialDataMeals, setInitialDataMeals] = useState([]);
   const [initialDataDrinks, setInitialDataDrinks] = useState([]);
   const [dataDrinks, setDataDrinks] = useState([]);
+  const [noFilters, setNoFilters] = useState(false);
 
   useEffect(() => {
     const fetchMeals = async () => {
@@ -48,6 +49,8 @@ function AppProvider({ children }) {
     initialDataDrinks,
     setDataMeals,
     setDataDrinks,
+    noFilters,
+    setNoFilters,
   }), [
     title,
     setTitle,
@@ -65,6 +68,8 @@ function AppProvider({ children }) {
     initialDataDrinks,
     setDataMeals,
     setDataDrinks,
+    noFilters,
+    setNoFilters,
   ]);
 
   return (
