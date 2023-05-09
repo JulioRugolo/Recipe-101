@@ -11,7 +11,7 @@ function Profile(props) {
     setFavoriteOrProfile(true);
   });
   const { history } = props;
-  const email = JSON.parse(localStorage.getItem('user'));
+  const email = localStorage.getItem('user');
 
   return (
     <>
@@ -45,7 +45,7 @@ function Profile(props) {
         Logout
 
       </button>
-      <Footer />
+      <Footer { ...props } />
     </>
   );
 }

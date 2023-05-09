@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import './Startrecipe.css';
+import shareIcon from '../images/shareIcon.svg';
 
 function MealDetails() {
   const [dataRecipesMeals, setDataRecipesMeals] = useState([]);
@@ -112,7 +113,7 @@ function MealDetails() {
             data-testid="share-btn"
             className="shareRecipe"
           >
-            Compartilhar
+            <img src={ shareIcon } alt="share" />
           </button>
           <button
             data-testid="favorite-btn"
