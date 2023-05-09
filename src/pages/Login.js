@@ -35,7 +35,7 @@ function Login(props) {
           disabled={ !isButtonValid }
           onClick={ () => {
             history.push('/meals');
-            localStorage.setItem('user', JSON.stringify({ email }));
+            localStorage.setItem('user', JSON.stringify(email));
           } }
         >
           Logar

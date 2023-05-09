@@ -122,6 +122,18 @@ function RecipeDetails() {
                 {inProgress ? 'Continue Recipe' : START_RECIPES}
 
               </button>
+              <button
+                data-testid="share-btn"
+              >
+                Compartilhar
+
+              </button>
+              <button
+                data-testid="favorite-btn"
+              >
+                Favoritar
+
+              </button>
             </div>
 
           );
@@ -212,6 +224,18 @@ function RecipeDetails() {
                 } }
               >
                 {inProgress ? 'Continue Recipe' : START_RECIPES}
+
+              </button>
+              <button
+                data-testid="share-btn"
+              >
+                Compartilhar
+
+              </button>
+              <button
+                data-testid="favorite-btn"
+              >
+                Favoritar
 
               </button>
             </div>

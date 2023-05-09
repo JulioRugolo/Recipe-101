@@ -11,7 +11,7 @@ function Profile(props) {
     setFavoriteOrProfile(true);
   });
   const { history } = props;
-  const email = localStorage.getItem('user');
+  const email = JSON.parse(localStorage.getItem('user'));
 
   return (
     <>
