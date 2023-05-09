@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import AppContext from '../context/AppContext';
 
 function RecipeDetails() {
   const [dataRecipesMeals, setDataRecipesMeals] = useState([]);
   const [dataRecipesDrinks, setDataRecipesDrinks] = useState([]);
+  const { dataMeals, dataDrinks } = useContext(AppContext);
   const location = useLocation();
+  const RECOMENDATIONS_QUANTITY = 6;
 
   useEffect(() => {
     async function fetchRecipesMeals() {
@@ -27,7 +30,7 @@ function RecipeDetails() {
     fetchRecipesMeals();
   }, [location]);
   return (
-    <div>
+    <div className="recipeDetails">
       {
         dataRecipesMeals && dataRecipesMeals.map((recipeMeal) => {
           const objectEntries = Object.entries(recipeMeal);
@@ -74,7 +77,36 @@ function RecipeDetails() {
                 height="315"
                 src={ recipeMeal.strYoutube.replace('/watch?v=', '/embed/') }
               />
+              <section className="recomendations">
+                {dataDrinks.map((item, index) => {
+                  if (index < RECOMENDATIONS_QUANTITY) {
+                    return (
+                      <a
+                        href={ `/drinks/${item.idDrink}}` }
+                        key={ item.idDrink }
+                        data-testid={ `${index}-recommendation-card` }
+                      >
+                        <div className="recomendationsCard">
+                          <p
+                            data-testid={ `${index}-recommendation-title` }
+                          >
+                            {item.strDrink}
+                          </p>
+                          <img
+                            src={ item.strDrinkThumb }
+                            width="100px"
+                            alt={ item.strDrink }
+                            data-testid={ `${index}-card-img` }
+                          />
+                        </div>
+                      </a>
+                    );
+                  }
+                  return console.log('');
+                })}
+              </section>
             </div>
+
           );
         })
       }
@@ -124,6 +156,34 @@ function RecipeDetails() {
                 height="315"
                 src={ recipeDrink.strVideo.replace('/watch?v=', '/embed/') }
               />}
+              <section className="recomendations">
+                {dataMeals.map((item, index) => {
+                  if (index < RECOMENDATIONS_QUANTITY) {
+                    return (
+                      <a
+                        href={ `/drinks/${item.idMeal}` }
+                        key={ item.idMeal }
+                        data-testid={ `${index}-recommendation-card` }
+                      >
+                        <div className="recomendationsCard">
+                          <p
+                            data-testid={ `${index}-recommendation-title` }
+                          >
+                            {item.strMeal}
+                          </p>
+                          <img
+                            src={ item.strMealThumb }
+                            width="100px"
+                            alt={ item.strMeal }
+                            data-testid={ `${index}-card-img` }
+                          />
+                        </div>
+                      </a>
+                    );
+                  }
+                  return console.log('');
+                })}
+              </section>
             </div>
           );
         })

@@ -28,7 +28,7 @@ function Drinks(props) {
     }
     fetchCategorys();
     setTitle('Drinks');
-  });
+  }, [setTitle, setCategorys]);
 
   return (
     <main className="recipeContainer">
