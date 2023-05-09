@@ -2,21 +2,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import './Startrecipe.css';
-import shareIcon from '../images/shareIcon.svg';
+import ShareButton from './buttons/ShareButton';
 
 function MealDetails() {
   const [dataRecipesMeals, setDataRecipesMeals] = useState([]);
-  const { dataDrinks } = useContext(AppContext);
+  const { dataDrinks, copyId } = useContext(AppContext);
   const location = useLocation();
   const RECOMENDATIONS_QUANTITY = 6;
   const inProgress = localStorage.getItem('inProgressRecipes');
   const history = useHistory();
   const START_RECIPES = 'Start Recipe';
+  const [id, setId] = useState('');
 
   useEffect(() => {
     async function fetchRecipesMeals() {
       const idPage = location.pathname.split('/')[2];
       const mealsPage = location.pathname.split('/')[1];
+      setId(idPage);
       if (mealsPage === 'meals') {
         const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idPage}`;
         const response = await fetch(url);
@@ -96,6 +98,7 @@ function MealDetails() {
               return console.log('');
             })}
           </section>
+          {copyId && <p>Link copied!</p>}
           <button
             data-testid="start-recipe-btn"
             className="startRecipe"
@@ -109,12 +112,7 @@ function MealDetails() {
             {inProgress ? 'Continue Recipe' : START_RECIPES}
 
           </button>
-          <button
-            data-testid="share-btn"
-            className="shareRecipe"
-          >
-            <img src={ shareIcon } alt="share" />
-          </button>
+          <ShareButton id={ id } />
           <button
             data-testid="favorite-btn"
             className="favoriteRecipe"
@@ -122,7 +120,6 @@ function MealDetails() {
             Favoritar
           </button>
         </div>
-
       );
     })
 
