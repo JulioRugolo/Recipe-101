@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import './Startrecipe.css';
 import ShareButton from './buttons/ShareButton';
+import FavoriteButton from './buttons/FavoriteButton';
 
 function DrinkDetails() {
   const [dataRecipesDrinks, setDataRecipesDrinks] = useState([]);
@@ -13,6 +14,7 @@ function DrinkDetails() {
   const history = useHistory();
   const START_RECIPES = 'Start Recipe';
   const [id, setId] = useState('');
+  const [recipe, setRecipe] = useState({});
 
   useEffect(() => {
     async function fetchRecipesMeals() {
@@ -24,6 +26,7 @@ function DrinkDetails() {
         const response = await fetch(url);
         const data = await response.json();
         setDataRecipesDrinks(data.drinks);
+        setRecipe({ ...data.drinks[0] });
       }
     }
     fetchRecipesMeals();
@@ -110,12 +113,7 @@ function DrinkDetails() {
 
           </button>
           <ShareButton id={ id } />
-          <button
-            data-testid="favorite-btn"
-            className="favoriteRecipe"
-          >
-            Favoritar
-          </button>
+          <FavoriteButton recipe={ recipe } />
         </div>
       );
     })
