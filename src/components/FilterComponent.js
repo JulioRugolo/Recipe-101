@@ -8,7 +8,8 @@ function FilterComponent(props) {
     initialDataMeals,
     initialDataDrinks,
     setDataMeals,
-    setDataDrinks } = useContext(AppContext);
+    setDataDrinks,
+    setNoFilters } = useContext(AppContext);
   const [mealsClick, setMealsClick] = useState(true);
   const [drinkClick, setDrinkClick] = useState(true);
 
@@ -31,7 +32,10 @@ function FilterComponent(props) {
   return (
     <button
       data-testid={ `${strCategory}-category-filter` }
-      onClick={ (event) => applyFilter(event) }
+      onClick={ (event) => {
+        applyFilter(event);
+        setNoFilters(true);
+      } }
     >
       {strCategory}
     </button>
