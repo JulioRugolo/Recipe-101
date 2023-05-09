@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import './Startrecipe.css';
 
 function RecipeDetails() {
   const [dataRecipesMeals, setDataRecipesMeals] = useState([]);
@@ -8,6 +9,7 @@ function RecipeDetails() {
   const { dataMeals, dataDrinks } = useContext(AppContext);
   const location = useLocation();
   const RECOMENDATIONS_QUANTITY = 6;
+  const inProgress = localStorage.getItem('inProgressRecipes');
 
   useEffect(() => {
     async function fetchRecipesMeals() {
@@ -105,6 +107,13 @@ function RecipeDetails() {
                   return console.log('');
                 })}
               </section>
+              <button
+                data-testid="start-recipe-btn"
+                className="startRecipe"
+              >
+                {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+
+              </button>
             </div>
 
           );
@@ -184,6 +193,13 @@ function RecipeDetails() {
                   return console.log('');
                 })}
               </section>
+              <button
+                data-testid="start-recipe-btn"
+                className="startRecipe"
+              >
+                {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+
+              </button>
             </div>
           );
         })

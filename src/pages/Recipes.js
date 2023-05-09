@@ -36,7 +36,6 @@ function Recipes(props) {
     <main className="recipeContainer">
       <Header />
       <SearchBar />
-      <Footer { ...props } />
       <button
         data-testid="gotodone"
         onClick={ () => history.push('/done-recipes') }
@@ -92,7 +91,7 @@ function Recipes(props) {
             return console.log('');
           }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
       </section>
-
+      <Footer { ...props } />
     </main>
   );
 }
