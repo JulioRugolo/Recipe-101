@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import ShareButton from './buttons/ShareButton';
+import FavoriteButton from './buttons/FavoriteButton';
+import AppContext from '../context/AppContext';
 
 function RecipeInProgressMeals() {
   const location = useLocation();
+  const { copyId } = useContext(AppContext);
   const [recipe, setRecipe] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [recipeButton, setRecipeButton] = useState([]);
+  const [id, setId] = useState('');
+
   useEffect(() => {
     async function fetchRecipesMeals() {
       const idPage = location.pathname.split('/')[2];
-      const mealsPage = location.pathname.split('/')[1];
-      if (mealsPage === 'drinks') {
-        const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idPage}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        setRecipe(data.drinks);
-        const objectEntries = Object.entries(data.drinks[0]);
-        const mapToFilterIngredients = objectEntries
-          .filter((entrie) => entrie[0].includes('strIngredient'))
-          .filter((ingredient) => ingredient[1]
-        !== null && ingredient[1] !== '');
-        setIngredients(mapToFilterIngredients);
-      }
+      const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idPage}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setRecipe(data.drinks);
+      const objectEntries = Object.entries(data.drinks[0]);
+      const mapToFilterIngredients = objectEntries
+        .filter((entrie) => entrie[0].includes('strIngredient'))
+        .filter((ingredient) => ingredient[1]
+      !== null && ingredient[1] !== '');
+      setIngredients(mapToFilterIngredients);
+      setRecipeButton({ ...data.drinks[0] });
+      setId(idPage);
     }
     fetchRecipesMeals();
   }, [location]);
@@ -60,18 +66,9 @@ function RecipeInProgressMeals() {
             </label>
           ))}
         </section>
-        <button
-          data-testid="share-btn"
-          className="shareRecipe"
-        >
-          Compartilhar
-        </button>
-        <button
-          data-testid="favorite-btn"
-          className="favoriteRecipe"
-        >
-          Favoritar
-        </button>
+        {copyId && <p>Link copied!</p>}
+        <ShareButton id={ id } />
+        <FavoriteButton recipe={ recipeButton } />
         <p data-testid="instructions">{recipeDetail.strInstructions}</p>
         <button data-testid="finish-recipe-btn"> Finalizar receita </button>
       </div>
