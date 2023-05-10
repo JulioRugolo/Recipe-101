@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -10,14 +10,23 @@ function FavoriteButton(props) {
   const mealsPage = location.pathname.split('/')[1];
   const favoriteKey = 'favoriteRecipes';
   const mealOrDrink = mealsPage === 'meals' ? recipe.idMeal : recipe.idDrink;
-  const arrayLocalStorage = JSON.parse(localStorage.getItem(favoriteKey));
-  const isFavorite = arrayLocalStorage
-    ? arrayLocalStorage
-      .find((item) => item.id === mealOrDrink) : false;
+  const [heart, setHeart] = useState(false);
+
+  useEffect(() => {
+    const retrieveLocal = JSON.parse(localStorage.getItem(favoriteKey));
+    const isFavorite = retrieveLocal
+        && retrieveLocal
+          .some((item) => item.id === mealOrDrink);
+    setHeart(isFavorite);
+  }, [mealOrDrink]);
 
   const handleClick = (event) => {
     event.preventDefault();
-    console.log(recipe);
+
+    const retrieveLocal = JSON.parse(localStorage.getItem(favoriteKey));
+    const isFavorite = retrieveLocal && retrieveLocal
+      .some((item) => item.id === mealOrDrink);
+
     const mealToSave = {
       id: recipe.idMeal ? recipe.idMeal : '',
       type: 'meal',
@@ -38,15 +47,23 @@ function FavoriteButton(props) {
       image: recipe.strDrinkThumb,
     };
     const retrieveLocalStorage = JSON.parse(localStorage.getItem(favoriteKey));
-    if (retrieveLocalStorage) {
+    if (retrieveLocalStorage && isFavorite === false) {
       localStorage.setItem(
         favoriteKey,
         JSON.stringify([...retrieveLocalStorage, mealsPage === 'meals'
           ? mealToSave : drinkToSave]),
       );
+      setHeart(!heart);
+    } else if (isFavorite) {
+      const removeRecipe = retrieveLocalStorage.filter((item) => item.id !== mealOrDrink);
+      localStorage.setItem(favoriteKey, JSON.stringify(removeRecipe));
+      setHeart(!heart);
     } else {
-      localStorage.setItem(favoriteKey, JSON.stringify([mealsPage === 'meals'
-        ? mealToSave : drinkToSave]));
+      localStorage.setItem(
+        favoriteKey,
+        JSON.stringify([mealsPage === 'meals' ? mealToSave : drinkToSave]),
+      );
+      setHeart(!heart);
     }
   };
 
@@ -55,9 +72,9 @@ function FavoriteButton(props) {
       data-testid="favorite-btn"
       className="favoriteRecipe"
       onClick={ (event) => handleClick(event) }
-      src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
+      src={ !heart ? whiteHeartIcon : blackHeartIcon }
     >
-      <img src={ !isFavorite ? whiteHeartIcon : blackHeartIcon } alt="favorite" />
+      <img src={ !heart ? whiteHeartIcon : blackHeartIcon } alt="favorite" />
     </button>
   );
 }
