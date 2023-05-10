@@ -9,7 +9,7 @@ function RecipeInProgress() {
   return (
     <div>
       {
-        mealsPage === 'drink' ? <RecipeInProgressDrinks />
+        mealsPage === 'drinks' ? <RecipeInProgressDrinks />
           : <RecipeInProgressMeals />
       }
     </div>

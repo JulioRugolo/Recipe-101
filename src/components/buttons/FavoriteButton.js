@@ -8,8 +8,8 @@ function FavoriteButton(props) {
   const { recipe } = props;
   const location = useLocation();
   const mealsPage = location.pathname.split('/')[1];
-  const favoriteKey = 'favoriteRecipes';
   const mealOrDrink = mealsPage === 'meals' ? recipe.idMeal : recipe.idDrink;
+  const favoriteKey = 'favoriteRecipes';
   const [heart, setHeart] = useState(false);
 
   useEffect(() => {
@@ -20,9 +20,7 @@ function FavoriteButton(props) {
     setHeart(isFavorite);
   }, [mealOrDrink]);
 
-  const handleClick = (event) => {
-    event.preventDefault();
-
+  const handleClick = () => {
     const retrieveLocal = JSON.parse(localStorage.getItem(favoriteKey));
     const isFavorite = retrieveLocal && retrieveLocal
       .some((item) => item.id === mealOrDrink);
@@ -46,16 +44,16 @@ function FavoriteButton(props) {
       name: recipe.strDrink,
       image: recipe.strDrinkThumb,
     };
-    const retrieveLocalStorage = JSON.parse(localStorage.getItem(favoriteKey));
-    if (retrieveLocalStorage && isFavorite === false) {
+
+    if (retrieveLocal && isFavorite === false) {
       localStorage.setItem(
         favoriteKey,
-        JSON.stringify([...retrieveLocalStorage, mealsPage === 'meals'
+        JSON.stringify([...retrieveLocal, mealsPage === 'meals'
           ? mealToSave : drinkToSave]),
       );
       setHeart(!heart);
     } else if (isFavorite) {
-      const removeRecipe = retrieveLocalStorage.filter((item) => item.id !== mealOrDrink);
+      const removeRecipe = retrieveLocal.filter((item) => item.id !== mealOrDrink);
       localStorage.setItem(favoriteKey, JSON.stringify(removeRecipe));
       setHeart(!heart);
     } else {
@@ -71,7 +69,7 @@ function FavoriteButton(props) {
     <button
       data-testid="favorite-btn"
       className="favoriteRecipe"
-      onClick={ (event) => handleClick(event) }
+      onClick={ () => handleClick() }
       src={ !heart ? whiteHeartIcon : blackHeartIcon }
     >
       <img src={ !heart ? whiteHeartIcon : blackHeartIcon } alt="favorite" />
