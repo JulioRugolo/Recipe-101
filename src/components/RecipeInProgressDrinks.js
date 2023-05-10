@@ -26,6 +26,11 @@ function RecipeInProgressMeals() {
     fetchRecipesMeals();
   }, [location]);
 
+  const handleClick = (index) => {
+    const input = document.getElementById(`input-${index}`);
+    input.style.textDecoration = 'line-through solid rgb(0, 0, 0)';
+  };
+
   return (
     recipe.map((recipeDetail) => (
       <div key={ recipeDetail.idDrink }>
@@ -43,11 +48,13 @@ function RecipeInProgressMeals() {
               key={ index }
               data-testid={ `${index}-ingredient-step` }
               htmlFor={ `${index}-ingredient-step` }
+              id={ `input-${index}` }
             >
               <input
                 id={ `${index}-ingredient-step` }
                 type="checkbox"
                 name={ `${index}-ingredient-step` }
+                onClick={ () => handleClick(index) }
               />
               {recipeDrink[1]}
             </label>
