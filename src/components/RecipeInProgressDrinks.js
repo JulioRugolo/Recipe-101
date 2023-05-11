@@ -61,7 +61,7 @@ function RecipeInProgressMeals() {
         <ShareButton id={ id } />
         <FavoriteButton recipe={ recipeButton } />
         <p data-testid="instructions">{recipeDetail.strInstructions}</p>
-        <ButtonValidator numberOfCheckbox={ ingredients.length } />
+        <ButtonValidator numberOfCheckbox={ ingredients.length } recipe={ recipe[0] } />
       </div>
     ))
 

@@ -102,11 +102,9 @@ function DrinkDetails() {
           <button
             data-testid="start-recipe-btn"
             className="startRecipe"
-            onClick={ ({ target }) => {
-              if (target.innerHTML === START_RECIPES) {
-                const idPage = location.pathname.split('/')[2];
-                history.push(`/drinks/${idPage}/in-progress`);
-              }
+            onClick={ () => {
+              const idPage = location.pathname.split('/')[2];
+              history.push(`/drinks/${idPage}/in-progress`);
             } }
           >
             {inProgress ? 'Continue Recipe' : START_RECIPES}
