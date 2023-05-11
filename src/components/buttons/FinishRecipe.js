@@ -1,27 +1,33 @@
 import { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import AppContext from '../../context/AppContext';
 
-function ButtonValidator(numberOfCheckbox) {
+function ButtonValidator(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const { checkboxes } = useContext(AppContext);
+  const { numberOfCheckbox, history } = props;
 
   useEffect(() => {
-    if (checkboxes.length === numberOfCheckbox) {
-      setIsDisabled(checkboxes.every((checkbox) => checkbox));
-    }
+    const areAllCheckboxesChecked = () => checkboxes.length === numberOfCheckbox
+  && checkboxes.every((checkbox) => checkbox === true);
+    setIsDisabled(!areAllCheckboxesChecked());
   }, [checkboxes, numberOfCheckbox]);
 
   return (
     <button
       data-testid="finish-recipe-btn"
       disabled={ isDisabled }
+      onClick={ () => { history.push('/done-recipes'); } }
     >
-      {' '}
       Finalizar receita
-      {' '}
-
     </button>
   );
 }
+
+ButtonValidator.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+}.isRequired;
 
 export default ButtonValidator;
