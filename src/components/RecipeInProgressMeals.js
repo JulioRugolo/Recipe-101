@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import FavoriteButton from './buttons/FavoriteButton';
 import ShareButton from './buttons/ShareButton';
 import AppContext from '../context/AppContext';
+import Checkbox from './buttons/Checkbox';
+import ButtonValidator from './buttons/FinishRecipe';
 
 function RecipeInProgressMeals() {
   const location = useLocation();
@@ -32,11 +34,6 @@ function RecipeInProgressMeals() {
     fetchRecipesMeals();
   }, [location]);
 
-  const handleClick = (index) => {
-    const input = document.getElementById(`input-${index}`);
-    input.style.textDecoration = 'line-through solid rgb(0, 0, 0)';
-  };
-
   return (
     recipe.map((recipeDetail) => (
       <div key={ recipeDetail.idMeal }>
@@ -50,27 +47,23 @@ function RecipeInProgressMeals() {
         <p data-testid="recipe-category">{recipeDetail.strCategory}</p>
         <section className="ingridients">
           {ingredients.map((recipeMeal, index) => (
-            <label
+
+            <Checkbox
               key={ index }
-              data-testid={ `${index}-ingredient-step` }
-              htmlFor={ `${index}-ingredient-step` }
-              id={ `input-${index}` }
-            >
-              <input
-                id={ `${index}-ingredient-step` }
-                type="checkbox"
-                name={ `${index}-ingredient-step` }
-                onClick={ () => handleClick(index) }
-              />
-              {recipeMeal[1]}
-            </label>
+              type="meals"
+              id={ recipeDetail.idMeal }
+              index={ index }
+              ingredients={ index }
+              name={ recipeMeal[1] }
+            />
+
           ))}
         </section>
         {copyId && <p>Link copied!</p>}
         <ShareButton id={ id } />
         <FavoriteButton recipe={ recipeButton } />
         <p data-testid="instructions">{recipeDetail.strInstructions}</p>
-        <button data-testid="finish-recipe-btn"> Finalizar receita </button>
+        <ButtonValidator numberOfCheckbox={ ingredients.length } />
       </div>
     ))
 
