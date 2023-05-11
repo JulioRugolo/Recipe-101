@@ -13,6 +13,8 @@ function AppProvider({ children }) {
   const [initialDataDrinks, setInitialDataDrinks] = useState([]);
   const [dataDrinks, setDataDrinks] = useState([]);
   const [noFilters, setNoFilters] = useState(false);
+  const [copyId, setCopyId] = useState(null);
+  const [dataRecipesDrinks, setDataRecipesDrinks] = useState([]);
 
   useEffect(() => {
     const fetchMeals = async () => {
@@ -51,6 +53,10 @@ function AppProvider({ children }) {
     setDataDrinks,
     noFilters,
     setNoFilters,
+    copyId,
+    setCopyId,
+    dataRecipesDrinks,
+    setDataRecipesDrinks,
   }), [
     title,
     setTitle,
@@ -70,6 +76,10 @@ function AppProvider({ children }) {
     setDataDrinks,
     noFilters,
     setNoFilters,
+    copyId,
+    setCopyId,
+    dataRecipesDrinks,
+    setDataRecipesDrinks,
   ]);
 
   return (

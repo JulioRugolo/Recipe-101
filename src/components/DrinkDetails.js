@@ -2,29 +2,35 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import './Startrecipe.css';
+import ShareButton from './buttons/ShareButton';
+import FavoriteButton from './buttons/FavoriteButton';
 
 function DrinkDetails() {
   const [dataRecipesDrinks, setDataRecipesDrinks] = useState([]);
-  const { dataMeals } = useContext(AppContext);
+  const { dataMeals, copyId } = useContext(AppContext);
   const location = useLocation();
   const RECOMENDATIONS_QUANTITY = 6;
   const inProgress = localStorage.getItem('inProgressRecipes');
   const history = useHistory();
   const START_RECIPES = 'Start Recipe';
+  const [id, setId] = useState('');
+  const [recipe, setRecipe] = useState({});
 
   useEffect(() => {
     async function fetchRecipesMeals() {
       const idPage = location.pathname.split('/')[2];
       const mealsPage = location.pathname.split('/')[1];
+      setId(idPage);
       if (mealsPage === 'drinks') {
         const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idPage}`;
         const response = await fetch(url);
         const data = await response.json();
         setDataRecipesDrinks(data.drinks);
+        setRecipe({ ...data.drinks[0] });
       }
     }
     fetchRecipesMeals();
-  }, [location]);
+  }, [location, setDataRecipesDrinks]);
 
   return (
     dataRecipesDrinks && dataRecipesDrinks.map((recipeDrink) => {
@@ -92,6 +98,7 @@ function DrinkDetails() {
               return console.log('');
             })}
           </section>
+          {copyId && <p>Link copied!</p>}
           <button
             data-testid="start-recipe-btn"
             className="startRecipe"
@@ -105,18 +112,8 @@ function DrinkDetails() {
             {inProgress ? 'Continue Recipe' : START_RECIPES}
 
           </button>
-          <button
-            data-testid="share-btn"
-            className="shareRecipe"
-          >
-            Compartilhar
-          </button>
-          <button
-            data-testid="favorite-btn"
-            className="favoriteRecipe"
-          >
-            Favoritar
-          </button>
+          <ShareButton id={ id } />
+          <FavoriteButton recipe={ recipe } />
         </div>
       );
     })

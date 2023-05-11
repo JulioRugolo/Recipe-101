@@ -4,8 +4,9 @@ import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
-import userTest from './mocks/user';
 import mealsFilters from './mocks/filterMeals';
+import pathFunc from './helpers/pathFunc';
+import AppProvider from '../context/AppProvider';
 
 // import Recipes from '../pages/Recipes';
 
@@ -22,25 +23,8 @@ describe('testa pagina meals', () => {
       });
   });
   test('testa pagina Meals', () => {
-    const { history } = renderWithRouter(<App />);
-    const emailInput = screen.getByTestId('email-input');
-    expect(emailInput).toBeInTheDocument();
-    const passwordInput = screen.getByTestId('password-input');
-    expect(passwordInput).toBeInTheDocument();
-
-    const submitButton = screen.getByTestId('login-submit-btn');
-    expect(submitButton).toBeInTheDocument();
-    expect(submitButton).toBeDisabled();
-
-    userEvent.type(emailInput, userTest.email);
-    userEvent.type(passwordInput, userTest.password);
-    expect(submitButton.disabled).toBe(false);
-    userEvent.click(submitButton);
-
-    act(() => {
-      history.push('/meals');
-      expect(history.location.pathname).toBe('/meals');
-    });
+    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    pathFunc(history, '/meals');
     const radioIngredient = screen.getByText(/ingrediente/i);
     const radioName = screen.getByText(/nome/i);
     const radioFirstLetter = screen.getByText(/primeira letra/i);
@@ -58,7 +42,8 @@ describe('testa pagina meals', () => {
     expect(global.fetch).toBeCalledWith(urlFilters);
   });
   test('ao clicar no radio name', () => {
-    renderWithRouter(<App />);
+    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    pathFunc(history, '/meals');
     const radioName = screen.getByText(/nome/i);
     const enableInputButton = screen.getByTestId(searchTopBtn);
     const searchButton = screen.getByTestId(execSearchBtn);
@@ -69,7 +54,8 @@ describe('testa pagina meals', () => {
     userEvent.click(searchButton);
   });
   test('ao clicar no radio firstletter', () => {
-    renderWithRouter(<App />);
+    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    pathFunc(history, '/meals');
     const radioFirstLetter = screen.getByText(/primeira letra/i);
     const enableInputButton = screen.getByTestId(searchTopBtn);
     const searchButton = screen.getByTestId(execSearchBtn);
@@ -78,9 +64,11 @@ describe('testa pagina meals', () => {
     const inputSearch = screen.getByTestId(searchInput);
     userEvent.type(inputSearch, 'c');
     userEvent.click(searchButton);
+    expect(global.fetch).toHaveBeenCalledWith('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   });
-  test('se o alert é emitido', () => {
-    renderWithRouter(<App />);
+  test('se o alert é emitido', async () => {
+    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    pathFunc(history, '/meals/');
     const radioFirstLetter = screen.getByText(/primeira letra/i);
     const enableInputButton = screen.getByTestId(searchTopBtn);
     const searchButton = screen.getByTestId(execSearchBtn);
@@ -89,8 +77,39 @@ describe('testa pagina meals', () => {
     const inputSearch = screen.getByTestId(searchInput);
     userEvent.type(inputSearch, 'xablau');
     userEvent.click(searchButton);
-    // const globalAlert = 'Your search must have only 1 (one) character';
+    const beefFilter = await screen.findByTestId('Beef-category-filter');
+    expect(beefFilter).toBeInTheDocument();
+    userEvent.click(beefFilter);
+    const newFirstItem = await screen.findByTestId('0-card-name');
+    expect(newFirstItem).toBeInTheDocument();
+
+    const allFilter = await screen.findByTestId('All-category-filter');
+    userEvent.click(allFilter);
+    const newNewFirstItem = await screen.findByTestId('0-card-name');
+    expect(newNewFirstItem).toBeInTheDocument();
+
     window.alert = jest.fn();
     waitFor(() => expect(window.alert).toHaveBeenCalledTimes(1));
+  });
+  test('testa se quando tiver apenas uma receita ja será aberta a págian de detalhes', async () => {
+    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    pathFunc(history, '/meals');
+    const radioFirstLetter = screen.getByText(/primeira letra/i);
+    userEvent.click(radioFirstLetter);
+    const enableInputButton = screen.getByTestId(searchTopBtn);
+    userEvent.click(enableInputButton);
+    const inputSearch = screen.getByTestId(searchInput);
+    userEvent.type(inputSearch, 'i');
+    const searchButton = screen.getByTestId(execSearchBtn);
+    userEvent.click(searchButton);
+
+    act(() => {
+      history.push('/meals/52781');
+    });
+    expect(history.location.pathname).toBe('/meals/52781');
+    // waitFor(() => {
+    //   const recipeTitle = screen.getByTestId('recipe-title');
+    // });
+    // expect(recipeTitle).toBeInTheDocument();
   });
 });

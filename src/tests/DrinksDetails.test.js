@@ -1,12 +1,15 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { renderWithRouter } from './helpers/renderWithRouter';
-import DrinkDetails from '../components/DrinkDetails';
+import AppProvider from '../context/AppProvider';
+import App from '../App';
+import pathFunc from './helpers/pathFunc';
 
-describe('Testa o componente MealsDetails', () => {
-  test('testa se os componentes estão renderizados', () => {
-    renderWithRouter(<DrinkDetails />);
-    const title = screen.getByTestId('detail-title');
+describe('Testa o componente DrinksDetails', () => {
+  test('testa se os componentes estão renderizados', async () => {
+    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    pathFunc(history, '/drinks/17222/');
+    const title = await screen.findByTestId('recipe-title');
     expect(title).toBeInTheDocument();
   });
 });
