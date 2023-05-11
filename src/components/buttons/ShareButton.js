@@ -7,7 +7,7 @@ import AppContext from '../../context/AppContext';
 const copy = require('clipboard-copy');
 
 function ShareButton(props) {
-  const { id } = props;
+  const { id, testId } = props;
   const { setCopyId } = useContext(AppContext);
   const location = useLocation();
   const mealsPage = location.pathname.split('/')[1];
@@ -19,7 +19,7 @@ function ShareButton(props) {
   };
   return (
     <button
-      data-testid="share-btn"
+      data-testid={ testId || 'share-btn' }
       className="shareRecipe"
       onClick={ (event) => handleShare(event) }
     >
@@ -30,6 +30,7 @@ function ShareButton(props) {
 
 ShareButton.propTypes = {
   id: PropTypes.string.isRequired,
+  testId: PropTypes.string.isRequired,
 };
 
 export default ShareButton;
