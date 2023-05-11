@@ -45,7 +45,7 @@ function RecipeInProgressMeals() {
         />
         <h3 data-testid="recipe-title">{recipeDetail.strMeal}</h3>
         <p data-testid="recipe-category">{recipeDetail.strCategory}</p>
-        <section className="ingridients">
+        <section className="ingredients">
           {ingredients.map((recipeMeal, index) => (
 
             <Checkbox

@@ -16,6 +16,7 @@ function AppProvider({ children }) {
   const [copyId, setCopyId] = useState(null);
   const [dataRecipesDrinks, setDataRecipesDrinks] = useState([]);
   const [checkboxes, setCheckboxes] = useState([]);
+  const [recipeDone, setRecipeDone] = useState('All');
 
   useEffect(() => {
     const fetchMeals = async () => {
@@ -60,6 +61,8 @@ function AppProvider({ children }) {
     setDataRecipesDrinks,
     checkboxes,
     setCheckboxes,
+    recipeDone,
+    setRecipeDone,
   }), [
     title,
     setTitle,
@@ -85,6 +88,8 @@ function AppProvider({ children }) {
     setDataRecipesDrinks,
     checkboxes,
     setCheckboxes,
+    recipeDone,
+    setRecipeDone,
   ]);
 
   return (

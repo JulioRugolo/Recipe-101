@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Drinks from './pages/Drinks';
 import Profile from './pages/Profile';
-import DoneRecipes from './pages/DoneRecipes';
+import DoneRecipePage from './pages/DoneRecipePage';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipeDetails from './components/RecipeDetails';
 import RecipeInProgress from './components/RecipeInProgress';
@@ -49,7 +49,7 @@ function App() {
         <Route
           exact
           path="/done-recipes"
-          component={ DoneRecipes }
+          component={ DoneRecipePage }
         />
         <Route
           exact

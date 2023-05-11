@@ -11,9 +11,9 @@ function ShareButton(props) {
   const { setCopyId } = useContext(AppContext);
   const location = useLocation();
   const mealsPage = location.pathname.split('/')[1];
+
   const handleShare = (event) => {
     event.preventDefault();
-    console.log(event);
     setCopyId(id);
     copy(`http://localhost:3000/${mealsPage}/${id}`);
   };

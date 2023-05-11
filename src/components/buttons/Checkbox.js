@@ -43,6 +43,8 @@ function Checkbox({ type, id, ingredients, index, name }) {
       data[type][id] = [ingredients];
     }
 
+    console.log(id, type, ingredients);
+
     localStorage.setItem('inProgressRecipes', JSON.stringify(data));
   }
 
