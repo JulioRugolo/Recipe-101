@@ -5,7 +5,7 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 function FavoriteButton(props) {
-  const { recipe } = props;
+  const { recipe, testId } = props;
   const location = useLocation();
   const mealsPage = location.pathname.split('/')[1];
   const mealOrDrink = mealsPage === 'meals' ? recipe.idMeal : recipe.idDrink;
@@ -67,8 +67,8 @@ function FavoriteButton(props) {
 
   return (
     <button
-      data-testid="favorite-btn"
-      className="favoriteRecipe"
+      data-testid={ testId || 'favorite-btn' }
+      className={ testId || 'favoriteRecipe' }
       onClick={ () => handleClick() }
       src={ !heart ? whiteHeartIcon : blackHeartIcon }
     >
@@ -89,6 +89,7 @@ FavoriteButton.propTypes = {
     idMeal: PropTypes.string,
     strMealThumb: PropTypes.string,
   }).isRequired,
+  testId: PropTypes.string.isRequired,
 };
 
 export default FavoriteButton;

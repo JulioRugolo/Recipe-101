@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
-import FavoriteRecipeMeals from '../components/FavoriteRecipeMeals';
-import FavoriteRecipeDrinks from '../components/FavoriteRecipeDrinks';
+import DoneRecipeMeals from '../components/DoneRecipeMeals';
+import DoneRecipeDrinks from '../components/DoneRecipeDrinks';
 
-const FAVORITE_RECIPES = 'favoriteRecipes';
-
-function FavoritesRecipes() {
-  const data = JSON.parse(localStorage.getItem(FAVORITE_RECIPES));
-  const [dataFiltered, setDataFiltered] = useState(data);
+function DoneRecipePage() {
   const { setTitle, setFavoriteOrProfile } = useContext(AppContext);
+  const DONE_RECIPES = 'doneRecipes';
+  const data = JSON.parse(localStorage.getItem(DONE_RECIPES));
+  const [dataFiltered, setDataFiltered] = useState(data);
   useEffect(() => {
-    setTitle('Favorite Recipes');
+    setTitle('Done Recipes');
     setFavoriteOrProfile(true);
   });
   const handleClick = ({ target }) => {
@@ -51,20 +50,12 @@ function FavoritesRecipes() {
       </button>
       {dataFiltered && dataFiltered.map((recipe, index) => {
         if (recipe.type === 'meal') {
-          return (<FavoriteRecipeMeals
-            recipe={ recipe }
-            index={ index }
-            key={ recipe.id }
-          />);
+          return <DoneRecipeMeals recipe={ recipe } index={ index } key={ recipe.id } />;
         }
-        return (<FavoriteRecipeDrinks
-          recipe={ recipe }
-          index={ index }
-          key={ recipe.id }
-        />);
+        return <DoneRecipeDrinks recipe={ recipe } index={ index } key={ recipe.id } />;
       })}
     </>
   );
 }
 
-export default FavoritesRecipes;
+export default DoneRecipePage;
