@@ -58,7 +58,7 @@ function RecipeInProgressMeals() {
           ))}
         </section>
         {copyId && <p>Link copied!</p>}
-        <ShareButton id={ id } />
+        <ShareButton id={ id } type="drinks" />
         <FavoriteButton recipe={ recipeButton } />
         <p data-testid="instructions">{recipeDetail.strInstructions}</p>
         <ButtonValidator numberOfCheckbox={ ingredients.length } recipe={ recipe[0] } />

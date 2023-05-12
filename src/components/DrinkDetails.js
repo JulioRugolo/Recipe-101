@@ -110,7 +110,10 @@ function DrinkDetails() {
             {inProgress ? 'Continue Recipe' : START_RECIPES}
 
           </button>
-          <ShareButton id={ id } />
+          <ShareButton
+            id={ id }
+            type="drinks"
+          />
           <FavoriteButton recipe={ recipe } />
         </div>
       );

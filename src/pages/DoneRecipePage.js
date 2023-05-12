@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
-import ShareButton from '../components/buttons/ShareButton';
+import DoneRecipeMeals from '../components/DoneRecipeMeals';
+import DoneRecipeDrinks from '../components/DoneRecipeDrinks';
 
 function DoneRecipePage() {
   const { setTitle, setFavoriteOrProfile } = useContext(AppContext);
@@ -32,7 +33,14 @@ function DoneRecipePage() {
         Drinks
 
       </button>
-      {data && data.map((recipe, index) => (
+      {data && data.map((recipe, index) => {
+        if (recipe.type === 'meal') {
+          return <DoneRecipeMeals recipe={ recipe } index={ index } key={ recipe.id } />;
+        }
+        return <DoneRecipeDrinks recipe={ recipe } index={ index } key={ recipe.id } />;
+      })}
+
+      {/* {data && data.map((recipe, index) => (
         <section key={ recipe.id }>
           <img
             src={ recipe.image }
@@ -50,7 +58,7 @@ function DoneRecipePage() {
           ))}
           <ShareButton id={ recipe.id } testId={ `${index}-horizontal-share-btn` } />
         </section>
-      ))}
+      ))} */}
     </>
   );
 }
