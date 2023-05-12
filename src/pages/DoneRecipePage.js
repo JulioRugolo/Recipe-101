@@ -54,26 +54,6 @@ function DoneRecipePage() {
         }
         return <DoneRecipeDrinks recipe={ recipe } index={ index } key={ recipe.id } />;
       })}
-
-      {/* {data && data.map((recipe, index) => (
-        <section key={ recipe.id }>
-          <img
-            src={ recipe.image }
-            alt={ recipe.name }
-            data-testid={ `${index}-horizontal-image` }
-          />
-          <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
-          <h2 data-testid={ `${index}-horizontal-top-text` }>{recipe.category}</h2>
-          <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
-          {recipe.tags.map((tag, indexT) => (
-            <span
-              key={ indexT }
-              data-testid={ `${index}-${tag}-horizontal-tag` }
-            />
-          ))}
-          <ShareButton id={ recipe.id } testId={ `${index}-horizontal-share-btn` } />
-        </section>
-      ))} */}
     </>
   );
 }

@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ShareButton from './buttons/ShareButton';
 import AppContext from '../context/AppContext';
+import FavoriteButton from './buttons/FavoriteButton';
 
-function DoneRecipeMeals(props) {
+function FavoriteRecipeMeals(props) {
   const { recipe, index } = props;
   const { copyId } = useContext(AppContext);
   return (
@@ -25,28 +26,19 @@ function DoneRecipeMeals(props) {
         {`${recipe.nationality} - ${recipe.category}`}
 
       </h2>
-      <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
-      {recipe.tags.map((tag, indexT) => (
-        <span
-          key={ indexT }
-          data-testid={ `${index}-${tag}-horizontal-tag` }
-        >
-          {tag}
-
-        </span>
-      ))}
       {copyId && <p>Link copied!</p>}
       <ShareButton
         id={ recipe.id }
         testId={ `${index}-horizontal-share-btn` }
         type="meals"
       />
+      <FavoriteButton recipe={ recipe } testId={ `${index}-horizontal-favorite-btn` } />
     </section>
   );
 }
 
-DoneRecipeMeals.propTypes = {
+FavoriteRecipeMeals.propTypes = {
   recipe: PropTypes.shape({}),
 }.isRequired;
 
-export default DoneRecipeMeals;
+export default FavoriteRecipeMeals;

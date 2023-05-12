@@ -8,12 +8,17 @@ function DoneRecipeDrinks(props) {
   const { copyId } = useContext(AppContext);
   return (
     <section key={ recipe.id }>
-      <img
-        src={ recipe.image }
-        alt={ recipe.name }
-        data-testid={ `${index}-horizontal-image` }
-      />
-      <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
+      <a href={ `http://localhost:3000/drinks/${recipe.id}` }>
+        <img
+          src={ recipe.image }
+          alt={ recipe.name }
+          data-testid={ `${index}-horizontal-image` }
+          width="200px"
+        />
+      </a>
+      <a href={ `http://localhost:3000/drinks/${recipe.id}` }>
+        <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
+      </a>
       <h2
         data-testid={ `${index}-horizontal-top-text` }
       >
