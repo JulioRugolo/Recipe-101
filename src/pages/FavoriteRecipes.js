@@ -9,11 +9,13 @@ const FAVORITE_RECIPES = 'favoriteRecipes';
 function FavoritesRecipes() {
   const data = JSON.parse(localStorage.getItem(FAVORITE_RECIPES));
   const [dataFiltered, setDataFiltered] = useState(data);
-  const { setTitle, setFavoriteOrProfile } = useContext(AppContext);
+  const { setTitle, setFavoriteOrProfile, updateLocalStorage } = useContext(AppContext);
+
   useEffect(() => {
     setTitle('Favorite Recipes');
     setFavoriteOrProfile(true);
-  });
+  }, [updateLocalStorage, setTitle, setFavoriteOrProfile]);
+
   const handleClick = ({ target }) => {
     if (target.innerHTML === 'Meals') {
       const mealsArray = data.filter((recipe) => recipe.type === 'meal');

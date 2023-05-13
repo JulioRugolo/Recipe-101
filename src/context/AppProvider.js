@@ -18,6 +18,7 @@ function AppProvider({ children }) {
   const [checkboxes, setCheckboxes] = useState([]);
   const [recipeDone, setRecipeDone] = useState('All');
   const [recipe, setRecipe] = useState({});
+  const [updateLocalStorage, setUpdateLocalStorage] = useState(false);
 
   useEffect(() => {
     const fetchMeals = async () => {
@@ -66,6 +67,8 @@ function AppProvider({ children }) {
     setRecipeDone,
     recipe,
     setRecipe,
+    updateLocalStorage,
+    setUpdateLocalStorage,
   }), [
     title,
     setTitle,
@@ -95,6 +98,8 @@ function AppProvider({ children }) {
     setRecipeDone,
     recipe,
     setRecipe,
+    updateLocalStorage,
+    setUpdateLocalStorage,
   ]);
 
   return (

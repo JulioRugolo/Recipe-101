@@ -6,6 +6,7 @@ import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
 import './recipe.css';
 import FilterComponent from '../components/FilterComponent';
+// import RecipeCard from '../components/RecipeCard';
 
 function Recipes(props) {
   const { setTitle,
@@ -64,6 +65,16 @@ function Recipes(props) {
         </button>
       </section>
       <section className="cardContainer">
+        {/* {dataMeals.length === 1 ? history.push(`/meals/${dataMeals[0].idMeal}`)
+          : dataMeals.map((meal, index) => (index < VALIDATE_ARRAY
+            && <RecipeCard
+              key={ meal.idMeal }
+              recipe={ meal }
+              index={ index }
+              length={ dataMeals.length }
+            />
+          ))} */}
+        {/* {dataMeals.length === 0 && global.alert('Sorry, we haven\'t found any recipes for these filters.')} */}
         {dataMeals
           ? dataMeals.map((meal, index) => {
             if (dataMeals.length === 1 && !noFilters) {

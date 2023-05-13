@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import FilterComponent from '../components/FilterComponent';
 
 const FILTER_NUMBER = 5;
+const VALIDATE_ARRAY = 12;
 
 function Drinks(props) {
   const {
@@ -15,7 +16,6 @@ function Drinks(props) {
     initialDataDrinks,
     setDataDrinks } = useContext(AppContext);
   const { history } = props;
-  const VALIDATE_ARRAY = 12;
 
   const [categorys, setCategorys] = useState([]);
 
@@ -48,6 +48,10 @@ function Drinks(props) {
         </button>
       </section>
       <section className="cardContainer">
+        {/* {dataDrinks
+          ? dataDrinks.map((drink, index) => index < VALIDATE_RECIPE
+          && <RecipeCard key={ drink.idDrink } recipe={ drink } index={ index } />)
+          : global.alert('Sorry, we haven\'t found any recipes for these filters.')} */}
         {dataDrinks
           ? dataDrinks.map((drink, index) => {
             if (dataDrinks.length === 1) {

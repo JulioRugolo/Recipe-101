@@ -74,7 +74,28 @@ function MealDetails() {
             src={ recipeMeal.strYoutube.replace('/watch?v=', '/embed/') }
           />
           <section className="recomendations">
-            {dataDrinks.map((item, index) => {
+            {dataDrinks.map((item, index) => index < RECOMENDATIONS_QUANTITY
+              && (
+                <a
+                  href={ `/drinks/${item.idDrink}}` }
+                  key={ item.idDrink }
+                  data-testid={ `${index}-recommendation-card` }
+                >
+                  <div className="recomendationsCard">
+                    <p
+                      data-testid={ `${index}-recommendation-title` }
+                    >
+                      {item.strDrink}
+                    </p>
+                    <img
+                      src={ item.strDrinkThumb }
+                      width="100px"
+                      alt={ item.strDrink }
+                      data-testid={ `${index}-card-img` }
+                    />
+                  </div>
+                </a>))}
+            {/* {dataDrinks.map((item, index) => {
               if (index < RECOMENDATIONS_QUANTITY) {
                 return (
                   <a
@@ -98,8 +119,7 @@ function MealDetails() {
                   </a>
                 );
               }
-              return console.log('');
-            })}
+            })} */}
           </section>
           {copyId && <p>Link copied!</p>}
           <button
