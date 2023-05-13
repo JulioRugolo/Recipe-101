@@ -1,7 +1,6 @@
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
 import mealsFilters from './mocks/filterMeals';
@@ -102,14 +101,23 @@ describe('testa pagina meals', () => {
     userEvent.type(inputSearch, 'i');
     const searchButton = screen.getByTestId(execSearchBtn);
     userEvent.click(searchButton);
-
-    act(() => {
-      history.push('/meals/52781');
+    await waitFor(() => {
+      expect(history.location.pathname).toBe('/meals/52781');
     });
-    expect(history.location.pathname).toBe('/meals/52781');
-    // waitFor(() => {
-    //   const recipeTitle = screen.getByTestId('recipe-title');
-    // });
-    // expect(recipeTitle).toBeInTheDocument();
+  });
+  test('testa se o botão Done Recipes é funcional', async () => {
+    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    pathFunc(history, '/meals');
+    const doneBtn = screen.getByTestId('gotodone');
+    userEvent.click(doneBtn);
+    expect(history.location.pathname).toBe('/done-recipes');
+  });
+  test('', async () => {
+    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    pathFunc(history, '/meals');
+    const categoryBtn = await screen.findByRole('button', { name: /beef/i });
+    userEvent.click(categoryBtn);
+    const pieMeal = screen.getByTestId('0-recipe-card');
+    expect(pieMeal).toBeInTheDocument();
   });
 });

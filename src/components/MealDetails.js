@@ -98,7 +98,6 @@ function MealDetails() {
                   </a>
                 );
               }
-              return console.log('');
             })}
           </section>
           {copyId && <p>Link copied!</p>}

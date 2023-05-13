@@ -11,5 +11,8 @@ describe('Testa o componente DrinksDetails', () => {
     pathFunc(history, '/drinks/17222/');
     const title = await screen.findByTestId('recipe-title');
     expect(title).toBeInTheDocument();
+
+    const drinksImg = await screen.findByRole('img', { name: /corba/i });
+    expect(drinksImg).toBeInTheDocument();
   });
 });

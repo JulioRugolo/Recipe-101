@@ -1,41 +1,27 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { renderWithRouter } from './helpers/renderWithRouter';
 import App from '../App';
 import userTest from './mocks/user';
+import DoneRecipePage from '../pages/DoneRecipePage';
+import AppProvider from '../context/AppProvider';
+import oneMeal from '../../cypress/mocks/oneMeal';
+import meals from '../../cypress/mocks/meals';
+import DoneRecipeMeals from '../components/DoneRecipeMeals';
 
 describe('Testa a página DoneRecipes', () => {
   test('testa se os componentes estão renderizados', () => {
-    const { history } = renderWithRouter(<App />);
-    const emailInput = screen.getByTestId('email-input');
-    expect(emailInput).toBeInTheDocument();
-    const passwordInput = screen.getByTestId('password-input');
-    expect(passwordInput).toBeInTheDocument();
+    renderWithRouter(<AppProvider><DoneRecipePage /></AppProvider>);
 
-    const submitButton = screen.getByTestId('login-submit-btn');
-    expect(submitButton).toBeInTheDocument();
-    expect(submitButton).toBeDisabled();
+    const mealsBtn = screen.getByRole('button', { name: /meals/i });
+    expect(mealsBtn).toBeInTheDocument();
 
-    userEvent.type(emailInput, userTest.email);
-    userEvent.type(passwordInput, userTest.password);
-    expect(submitButton.disabled).toBe(false);
-    userEvent.click(submitButton);
+    const profileBtn = screen.getByRole('img', { name: /search/i });
+    expect(profileBtn).toBeInTheDocument();
 
-    act(() => {
-      history.push('/meals');
-      expect(history.location.pathname).toBe('/meals');
-    });
-
-    const buttonGoToDone = screen.getByTestId('gotodone');
-    userEvent.click(buttonGoToDone);
-
-    act(() => {
-      history.push('/done-recipes');
-      expect(history.location.pathname).toBe('/done-recipes');
-      const title = screen.getByTestId('title');
-      expect(title).toBeInTheDocument();
-    });
+    const doneTitle = screen.getByRole('heading', { name: /done recipes/i });
+    expect(doneTitle);
   });
 });

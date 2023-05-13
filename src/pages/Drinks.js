@@ -49,30 +49,30 @@ function Drinks(props) {
       </section>
       <section className="cardContainer">
         {dataDrinks
-          ? dataDrinks.map((drink, index) => {
-            if (dataDrinks.length === 1) {
+          ? dataDrinks.map((drink, index) =>
+            /*  if (dataDrinks.length === 1) {
               history.push(`/drinks/${dataDrinks[0].idDrink}`);
-            } else if (index < VALIDATE_ARRAY) {
-              return (
-                <a href={ `/drinks/${drink.idDrink}` } key={ drink.idDrink }>
-                  <div
-                    data-testid={ `${index}-recipe-card` }
-                    key={ drink.idDrink }
-                    className="recipeCard"
-                  >
-                    <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
-                    <img
-                      src={ drink.strDrinkThumb }
-                      width="100px"
-                      alt={ drink.strDrink }
-                      data-testid={ `${index}-card-img` }
-                    />
-                  </div>
-                </a>
-              );
-            }
-            return index;
-          }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
+            } else if (index < VALIDATE_ARRAY) { */
+            (
+              <a href={ `/drinks/${drink.idDrink}` } key={ drink.idDrink }>
+                <div
+                  data-testid={ `${index}-recipe-card` }
+                  key={ drink.idDrink }
+                  className="recipeCard"
+                >
+                  <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
+                  <img
+                    src={ drink.strDrinkThumb }
+                    width="100px"
+                    alt={ drink.strDrink }
+                    data-testid={ `${index}-card-img` }
+                  />
+                </div>
+              </a>
+            ),
+            /*  } */
+            /*  return index; */
+          ) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
       </section>
     </main>
   );
