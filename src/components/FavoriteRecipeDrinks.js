@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ShareButton from './buttons/ShareButton';
 import AppContext from '../context/AppContext';
@@ -7,6 +7,16 @@ import FavoriteButton from './buttons/FavoriteButton';
 function FavoriteRecipeDrinks(props) {
   const { recipe, index } = props;
   const { copyId } = useContext(AppContext);
+  const [fullRecipe, setFullRecipe] = useState({});
+  useEffect(() => {
+    async function fetchRecipesDrinks() {
+      const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recipe.id}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setFullRecipe({ ...data.drinks[0] });
+    }
+    fetchRecipesDrinks();
+  }, [recipe.id]);
   return (
     <section key={ recipe.id }>
       <a href={ `http://localhost:3000/drinks/${recipe.id}` }>
@@ -32,7 +42,10 @@ function FavoriteRecipeDrinks(props) {
         testId={ `${index}-horizontal-share-btn` }
         type="drinks"
       />
-      <FavoriteButton recipe testId={ `${index}-horizontal-favorite-btn` } />
+      <FavoriteButton
+        recipe={ fullRecipe }
+        testId={ `${index}-horizontal-favorite-btn` }
+      />
     </section>
   );
 }

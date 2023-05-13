@@ -52,3 +52,7 @@ a {
 .recomendationsCard img {
   width: 95px;
 }
+
+.noDisplay {
+  display: none;
+}

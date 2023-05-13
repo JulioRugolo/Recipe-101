@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 function FavoriteButton(props) {
   const { recipe, testId } = props;
-  const location = useLocation();
-  const mealsPage = location.pathname.split('/')[1];
-  const mealOrDrink = mealsPage === 'meals' ? recipe.idMeal : recipe.idDrink;
+  const mealOrDrink = recipe.idDrink === undefined ? recipe.idMeal : recipe.idDrink;
   const favoriteKey = 'favoriteRecipes';
   const [heart, setHeart] = useState(false);
 
@@ -24,32 +21,20 @@ function FavoriteButton(props) {
     const retrieveLocal = JSON.parse(localStorage.getItem(favoriteKey));
     const isFavorite = retrieveLocal && retrieveLocal
       .some((item) => item.id === mealOrDrink);
-
-    const mealToSave = {
-      id: recipe.idMeal ? recipe.idMeal : '',
-      type: 'meal',
-      nationality: recipe.strArea ? recipe.strArea : '',
-      category: recipe.strCategory ? recipe.strCategory : '',
-      alcoholicOrNot: '',
-      name: recipe.strMeal ? recipe.strMeal : '',
-      image: recipe.strMealThumb ? recipe.strMealThumb : '',
-    };
-
-    const drinkToSave = {
-      id: recipe.idDrink,
-      type: 'drink',
-      nationality: '',
-      category: recipe.strCategory,
-      alcoholicOrNot: recipe.strAlcoholic,
-      name: recipe.strDrink,
-      image: recipe.strDrinkThumb,
+    const recipeToSave = {
+      id: recipe.idMeal !== undefined ? recipe.idMeal : recipe.idDrink,
+      type: recipe.idMeal !== undefined ? 'meal' : 'drink',
+      nationality: recipe.strArea === undefined ? '' : recipe.strArea,
+      category: recipe.idMeal !== undefined ? recipe.strCategory : recipe.strCategory,
+      alcoholicOrNot: recipe.idMeal !== undefined ? '' : 'Alcoholic',
+      name: recipe.idMeal !== undefined ? recipe.strMeal : recipe.strDrink,
+      image: recipe.idMeal !== undefined ? recipe.strMealThumb : recipe.strDrinkThumb,
     };
 
     if (retrieveLocal && isFavorite === false) {
       localStorage.setItem(
         favoriteKey,
-        JSON.stringify([...retrieveLocal, mealsPage === 'meals'
-          ? mealToSave : drinkToSave]),
+        JSON.stringify([...retrieveLocal, recipeToSave]),
       );
       setHeart(!heart);
     } else if (isFavorite) {
@@ -59,7 +44,7 @@ function FavoriteButton(props) {
     } else {
       localStorage.setItem(
         favoriteKey,
-        JSON.stringify([mealsPage === 'meals' ? mealToSave : drinkToSave]),
+        JSON.stringify([recipeToSave]),
       );
       setHeart(!heart);
     }
