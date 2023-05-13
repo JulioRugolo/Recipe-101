@@ -5,10 +5,9 @@ import AppContext from '../context/AppContext';
 import SearchBar from '../components/SearchBarDrinks';
 import Footer from '../components/Footer';
 import FilterComponent from '../components/FilterComponent';
-import RecipeCard from '../components/RecipeCard';
 
 const FILTER_NUMBER = 5;
-const VALIDATE_RECIPE = 12;
+const VALIDATE_ARRAY = 12;
 
 function Drinks(props) {
   const {
@@ -16,6 +15,7 @@ function Drinks(props) {
     dataDrinks,
     initialDataDrinks,
     setDataDrinks } = useContext(AppContext);
+  const { history } = props;
 
   const [categorys, setCategorys] = useState([]);
 
@@ -48,10 +48,35 @@ function Drinks(props) {
         </button>
       </section>
       <section className="cardContainer">
-        {dataDrinks
+        {/* {dataDrinks
           ? dataDrinks.map((drink, index) => index < VALIDATE_RECIPE
           && <RecipeCard key={ drink.idDrink } recipe={ drink } index={ index } />)
-          : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
+          : global.alert('Sorry, we haven\'t found any recipes for these filters.')} */}
+        {dataDrinks
+          ? dataDrinks.map((drink, index) => {
+            if (dataDrinks.length === 1) {
+              history.push(`/drinks/${dataDrinks[0].idDrink}`);
+            } else if (index < VALIDATE_ARRAY) {
+              return (
+                <a href={ `/drinks/${drink.idDrink}` } key={ drink.idDrink }>
+                  <div
+                    data-testid={ `${index}-recipe-card` }
+                    key={ drink.idDrink }
+                    className="recipeCard"
+                  >
+                    <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
+                    <img
+                      src={ drink.strDrinkThumb }
+                      width="100px"
+                      alt={ drink.strDrink }
+                      data-testid={ `${index}-card-img` }
+                    />
+                  </div>
+                </a>
+              );
+            }
+            return index;
+          }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
       </section>
     </main>
   );

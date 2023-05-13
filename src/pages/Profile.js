@@ -11,12 +11,12 @@ function Profile(props) {
     setFavoriteOrProfile(true);
   });
   const { history } = props;
-  const retrieveEmail = JSON.parse(localStorage.getItem('user'));
+  const email = localStorage.getItem('user');
 
   return (
     <>
       <Header />
-      <h2 data-testid="profile-email">{ retrieveEmail }</h2>
+      <h2 data-testid="profile-email">{ email }</h2>
       <button
         data-testid="profile-done-btn"
         onClick={ () => {

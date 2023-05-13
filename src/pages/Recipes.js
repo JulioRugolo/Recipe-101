@@ -6,13 +6,14 @@ import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
 import './recipe.css';
 import FilterComponent from '../components/FilterComponent';
-import RecipeCard from '../components/RecipeCard';
+// import RecipeCard from '../components/RecipeCard';
 
 function Recipes(props) {
   const { setTitle,
     dataMeals,
     initialDataMeals,
     setDataMeals,
+    noFilters,
     setNoFilters,
   } = useContext(AppContext);
   const { history } = props;
@@ -64,10 +65,42 @@ function Recipes(props) {
         </button>
       </section>
       <section className="cardContainer">
+        {/* {dataMeals.length === 1 ? history.push(`/meals/${dataMeals[0].idMeal}`)
+          : dataMeals.map((meal, index) => (index < VALIDATE_ARRAY
+            && <RecipeCard
+              key={ meal.idMeal }
+              recipe={ meal }
+              index={ index }
+              length={ dataMeals.length }
+            />
+          ))} */}
+        {/* {dataMeals.length === 0 && global.alert('Sorry, we haven\'t found any recipes for these filters.')} */}
         {dataMeals
-          ? dataMeals.map((meal, index) => index < VALIDATE_ARRAY
-          && <RecipeCard key={ meal.idMeal } recipe={ meal } index={ index } />)
-          : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
+          ? dataMeals.map((meal, index) => {
+            if (dataMeals.length === 1 && !noFilters) {
+              history.push(`/meals/${dataMeals[0].idMeal}`);
+            } else if (index < VALIDATE_ARRAY) {
+              return (
+                <a href={ `/meals/${meal.idMeal}` } key={ meal.idMeal }>
+                  <div
+                    data-testid={ `${index}-recipe-card` }
+                    className="recipeCard"
+                    key={ meal.idMeal }
+                  >
+                    <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
+                    <img
+                      src={ meal.strMealThumb }
+                      width="100px"
+                      alt={ meal.strMeal }
+                      data-testid={ `${index}-card-img` }
+                    />
+                  </div>
+                </a>
+
+              );
+            }
+            return console.log('');
+          }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
       </section>
       <Footer { ...props } />
     </main>
