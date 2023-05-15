@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { number6, regexValidation } from '../services/consts';
+import './Login.css';
+import logo from '../images/logo.png';
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -13,22 +15,27 @@ function Login(props) {
 
   return (
     <main className="loginPage">
+      <div className="logo">
+        <img src={ logo } alt="Logo Recipe 101" />
+      </div>
       <div className="formLogin">
-        <input
-          type="email"
-          data-testid="email-input"
-          value={ email }
-          onChange={ ({ target }) => setEmail(target.value) }
-          placeholder="Digite seu email"
-        />
+        <div className="formFields">
+          <input
+            type="email"
+            data-testid="email-input"
+            value={ email }
+            onChange={ ({ target }) => setEmail(target.value) }
+            placeholder="Digite seu email"
+          />
 
-        <input
-          type="password"
-          data-testid="password-input"
-          value={ password }
-          onChange={ ({ target }) => setPassword(target.value) }
-          placeholder="Digite sua senha"
-        />
+          <input
+            type="password"
+            data-testid="password-input"
+            value={ password }
+            onChange={ ({ target }) => setPassword(target.value) }
+            placeholder="Digite sua senha"
+          />
+        </div>
         <button
           type="button"
           data-testid="login-submit-btn"
@@ -37,6 +44,7 @@ function Login(props) {
             history.push('/meals');
             localStorage.setItem('user', JSON.stringify({ email }));
           } }
+          className="submitBtn"
         >
           Logar
         </button>

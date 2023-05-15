@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 390px;
 }
 
 .cardContainer {
@@ -12,18 +13,41 @@
   gap: 20px;
   justify-content: center;
   margin-top: 50px;
+  width: 390px;
 }
 
 .recipeCard {
   align-items: center;
   background-color: antiquewhite;
-  border-radius: 30px 0;
   box-shadow: rgba(0, 0, 0, 0.215) 2px 1px 5px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  padding: 20px;
-  width: 300px;
+  height: 200px;
+
+  width: 390px;
+}
+
+.recipeCard div {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.image img {
+  width: 200px;
+}
+
+.recipeInfo {
+  justify-self:flex-end;
+  background-color: aqua;
+  padding-top: 10px;
+  padding-left: 10px;
+  height: 100%;
+}
+.recipeInfo p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .recipeCard:hover {
@@ -55,4 +79,38 @@ a {
 
 .noDisplay {
   display: none;
+}
+
+.filterBtn {
+  background-color: unset;
+  border: unset;
+}
+
+.filterBtn img {
+  width: 30px;
+  height: 30px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.filterButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  color: #BC3C0D;
+  font-weight: 800;
+  zoom: 1.2;
+}
+
+.btn-outline-warning:hover {
+  color: #BC3C0D;
 }

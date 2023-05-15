@@ -50,14 +50,14 @@ function SearchBar() {
           />
           Primeira Letra
         </label>
-        <button
-          type="button"
-          onClick={ () => handleClick() }
-          data-testid="exec-search-btn"
-        >
-          Search
-        </button>
       </div>
+      <button
+        type="button"
+        onClick={ () => handleClick() }
+        data-testid="exec-search-btn"
+      >
+        Search
+      </button>
     </nav>
   );
 }

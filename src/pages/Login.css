@@ -1,0 +1,64 @@
+.loginPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 50px;
+    background-color: #BC3C0D;
+}
+
+.logo {
+    display: flex;
+    max-width: 100vh;
+    max-height: 100vh;
+}
+
+.logo img {
+    width: 100%;
+}
+
+.formLogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #F4A20F;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.formFields {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+.formFields input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 20px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.submitBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #BC3C0D;
+    color: white;
+    font-weight:900;
+}
+
+.submitBtn:disabled {
+    background-color: white;
+}

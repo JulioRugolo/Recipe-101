@@ -32,6 +32,7 @@ function FilterComponent(props) {
   return (
     <button
       data-testid={ `${strCategory}-category-filter` }
+      className="btn btn-outline-warning"
       onClick={ (event) => {
         applyFilter(event);
         setNoFilters(true);

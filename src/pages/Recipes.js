@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
-import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer';
 import './recipe.css';
 import FilterComponent from '../components/FilterComponent';
@@ -34,76 +33,64 @@ function Recipes(props) {
   }, [setTitle, setCategorys, dataMeals]);
 
   return (
-    <main className="recipeContainer">
+    <>
       <Header />
-      <SearchBar />
-      <button
-        data-testid="gotodone"
-        onClick={ () => history.push('/done-recipes') }
-      >
-        Done Recipes
-      </button>
-      <button
-        data-testid="favorites"
-        onClick={ () => history.push('/favorite-recipes') }
-      >
-        FavoriteRecipes
-      </button>
       <section className="filters">
-        {categorys.map((category, index) => (
-          index < FILTER_NUMBER && <FilterComponent { ...category } key={ index } />
-        ))}
-        <button
-          data-testid="All-category-filter"
-          onClick={ () => {
-            setDataMeals(initialDataMeals);
-            setNoFilters(false);
-          } }
-        >
-          All
+        <div className="filterButtons">
+          {categorys.map((category, index) => (
+            index < FILTER_NUMBER && <FilterComponent { ...category } key={ index } />
+          ))}
+          <button
+            data-testid="All-category-filter"
+            className="btn btn-outline-warning"
+            onClick={ () => {
+              setDataMeals(initialDataMeals);
+              setNoFilters(false);
+            } }
+          >
+            All
 
-        </button>
+          </button>
+        </div>
       </section>
-      <section className="cardContainer">
-        {/* {dataMeals.length === 1 ? history.push(`/meals/${dataMeals[0].idMeal}`)
-          : dataMeals.map((meal, index) => (index < VALIDATE_ARRAY
-            && <RecipeCard
-              key={ meal.idMeal }
-              recipe={ meal }
-              index={ index }
-              length={ dataMeals.length }
-            />
-          ))} */}
-        {/* {dataMeals.length === 0 && global.alert('Sorry, we haven\'t found any recipes for these filters.')} */}
-        {dataMeals
-          ? dataMeals.map((meal, index) => {
-            if (dataMeals.length === 1 && !noFilters) {
-              history.push(`/meals/${dataMeals[0].idMeal}`);
-            } else if (index < VALIDATE_ARRAY) {
-              return (
-                <a href={ `/meals/${meal.idMeal}` } key={ meal.idMeal }>
-                  <div
-                    data-testid={ `${index}-recipe-card` }
-                    className="recipeCard"
-                    key={ meal.idMeal }
-                  >
-                    <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
-                    <img
-                      src={ meal.strMealThumb }
-                      width="100px"
-                      alt={ meal.strMeal }
-                      data-testid={ `${index}-card-img` }
-                    />
-                  </div>
-                </a>
+      <main className="recipeContainer">
 
-              );
-            }
-            return console.log('');
-          }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
-      </section>
-      <Footer { ...props } />
-    </main>
+        <section className="cardContainer">
+          {dataMeals
+            ? dataMeals.map((meal, index) => {
+              if (dataMeals.length === 1 && !noFilters) {
+                history.push(`/meals/${dataMeals[0].idMeal}`);
+              } else if (index < VALIDATE_ARRAY) {
+                return (
+                  <a href={ `/meals/${meal.idMeal}` } key={ meal.idMeal }>
+                    <div
+                      data-testid={ `${index}-recipe-card` }
+                      className="recipeCard"
+                      key={ meal.idMeal }
+                    >
+                      <div className="image">
+                        <img
+                          src={ meal.strMealThumb }
+                          width="100px"
+                          alt={ meal.strMeal }
+                          data-testid={ `${index}-card-img` }
+                        />
+                      </div>
+                      <div className="recipeInfo">
+                        <h3 data-testid={ `${index}-card-name` }>{meal.strMeal}</h3>
+                        <p>{meal.strInstructions}</p>
+                      </div>
+                    </div>
+                  </a>
+
+                );
+              }
+              return console.log('');
+            }) : global.alert('Sorry, we haven\'t found any recipes for these filters.')}
+        </section>
+        <Footer { ...props } />
+      </main>
+    </>
   );
 }
 

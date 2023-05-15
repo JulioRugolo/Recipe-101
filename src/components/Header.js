@@ -4,7 +4,8 @@ import { useHistory } from 'react-router-dom';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import AppContext from '../context/AppContext';
-import './style.css';
+import './header.css';
+import SearchBar from './SearchBar';
 
 function Header() {
   const { title, favoriteOrProfile, controlInput,
@@ -13,8 +14,8 @@ function Header() {
   const [inputSearch, setInputSearch] = useState(false);
   return (
     <header>
-      <h1 data-testid="page-title">{ title }</h1>
-      <div>
+      <div className="title">
+        <h1 data-testid="page-title">{ title }</h1>
         <button
           src={ profileIcon }
           data-testid="profile-top-btn"
@@ -24,29 +25,38 @@ function Header() {
         >
           <img src={ profileIcon } alt="search" />
         </button>
-        {
-          favoriteOrProfile === false && (
-            <button
-              src={ searchIcon }
-              data-testid="search-top-btn"
-              onClick={ () => {
-                setInputSearch(!inputSearch);
-              } }
-            >
-              <img src={ searchIcon } alt="search" />
-            </button>
-          )
-        }
-        {
-          inputSearch && <input
-            name="controlInput"
-            value={ controlInput }
-            onChange={ ({ target }) => setControlInput(target.value) }
-            data-testid="search-input"
-            type="text"
-          />
-        }
       </div>
+      <div className="search">
+        <div className="searchInput">
+          {
+            favoriteOrProfile === false && (
+              <button
+                src={ searchIcon }
+                className="searchSvg"
+                data-testid="search-top-btn"
+                onClick={ () => {
+                  setInputSearch(!inputSearch);
+                } }
+              >
+                <img src={ searchIcon } alt="search" />
+              </button>
+            )
+          }
+          {
+            inputSearch && <input
+              name="controlInput"
+              value={ controlInput }
+              className="inputType"
+              onChange={ ({ target }) => setControlInput(target.value) }
+              data-testid="search-input"
+              type="text"
+            />
+          }
+          {inputSearch && <SearchBar /> }
+        </div>
+
+      </div>
+
     </header>
   );
 }
