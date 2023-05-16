@@ -5,6 +5,8 @@ import './Startrecipe.css';
 import ShareButton from './buttons/ShareButton';
 import FavoriteButton from './buttons/FavoriteButton';
 
+import './RecipeDetails.css';
+
 function MealDetails() {
   const [dataRecipesMeals, setDataRecipesMeals] = useState([]);
   const { dataDrinks, copyId } = useContext(AppContext);
@@ -47,18 +49,34 @@ function MealDetails() {
         .filter((ingredient) => ingredient[1]
         !== null && `${ingredient[0]}:${ingredient[1]}`);
       return (
-        <div key={ recipeMeal.idMeal }>
-          <h3 data-testid="recipe-title">{recipeMeal.strMeal}</h3>
+        <div key={ recipeMeal.idMeal } className="recipe-details">
           <img
             data-testid="recipe-photo"
             src={ recipeMeal.strMealThumb }
             alt={ recipeMeal.strMeal }
           />
-          <p data-testid="recipe-category">{recipeMeal.strCategory}</p>
-          <p data-testid="instructions">{recipeMeal.strInstructions}</p>
+          <h3 data-testid="recipe-title">{recipeMeal.strMeal}</h3>
+          <p
+            data-testid="recipe-category"
+            className="recipe-category"
+          >
+            {recipeMeal.strCategory}
+
+          </p>
+          <p
+            data-testid="instructions"
+            className="recipe-intructions"
+          >
+            {recipeMeal.strInstructions}
+
+          </p>
           {
             mapToFilterIngredients.map((ingredient, index) => (
-              <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
+              <p
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                className="recipe-ingredient"
+              >
                 {`${ingredient[1]} ${mapToFilterMeasures[index][1]} `}
               </p>
 
@@ -121,23 +139,26 @@ function MealDetails() {
               }
             })} */}
           </section>
-          {copyId && <p>Link copied!</p>}
-          <button
-            data-testid="start-recipe-btn"
-            className="startRecipe"
-            onClick={ () => {
-              const idPage = location.pathname.split('/')[2];
-              history.push(`/meals/${idPage}/in-progress`);
-            } }
-          >
-            {inProgress ? 'Continue Recipe' : START_RECIPES}
 
-          </button>
-          <ShareButton
-            id={ id }
-            type="meals"
-          />
-          <FavoriteButton recipe={ recipe } />
+          <section className="button-container">
+            <button
+              data-testid="start-recipe-btn"
+              className="startRecipe btn btn-warning"
+              onClick={ () => {
+                const idPage = location.pathname.split('/')[2];
+                history.push(`/meals/${idPage}/in-progress`);
+              } }
+            >
+              {inProgress ? 'Continue Recipe' : START_RECIPES}
+
+            </button>
+            <ShareButton
+              id={ id }
+              type="meals"
+            />
+            {copyId && <p>Link copied!</p>}
+            <FavoriteButton recipe={ recipe } />
+          </section>
         </div>
       );
     })

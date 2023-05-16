@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ShareButton from './buttons/ShareButton';
 import AppContext from '../context/AppContext';
 
+import './RecipeDetails.css';
+
 function DoneRecipeMeals(props) {
   const { recipe, index } = props;
   const { copyId } = useContext(AppContext);

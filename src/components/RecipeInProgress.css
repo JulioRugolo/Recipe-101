@@ -1,0 +1,22 @@
+.recipe-inProgress {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align:justify;
+}
+
+.recipe-inProgress img {
+  width: 100%;
+}
+
+.recipe-inProgress h3 {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 25px;
+}
+
+.ingredient {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}

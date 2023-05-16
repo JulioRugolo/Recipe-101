@@ -7,6 +7,8 @@ import AppContext from '../context/AppContext';
 import Checkbox from './buttons/Checkbox';
 import ButtonValidator from './buttons/FinishRecipe';
 
+import './RecipeInProgress.css';
+
 function RecipeInProgressMeals() {
   const location = useLocation();
   const { copyId } = useContext(AppContext);
@@ -36,7 +38,7 @@ function RecipeInProgressMeals() {
 
   return (
     recipe.map((recipeDetail) => (
-      <div key={ recipeDetail.idMeal }>
+      <div key={ recipeDetail.idMeal } className="recipe-inProgress">
         <img
           data-testid="recipe-photo"
           src={ recipeDetail.strMealThumb }
@@ -47,7 +49,6 @@ function RecipeInProgressMeals() {
         <p data-testid="recipe-category">{recipeDetail.strCategory}</p>
         <section className="ingredients">
           {ingredients.map((recipeMeal, index) => (
-
             <Checkbox
               key={ index }
               type="meals"
@@ -56,7 +57,6 @@ function RecipeInProgressMeals() {
               ingredients={ index }
               name={ recipeMeal[1] }
             />
-
           ))}
         </section>
         {copyId && <p>Link copied!</p>}
