@@ -16,7 +16,12 @@ function Profile(props) {
   return (
     <>
       <Header />
-      <h2 data-testid="profile-email">{ email?.email }</h2>
+      <h1>Nome: Julio</h1>
+      <h2 data-testid="profile-email">
+        Email:
+        {' '}
+        { email?.email }
+      </h2>
       <button
         data-testid="profile-done-btn"
         onClick={ () => {
