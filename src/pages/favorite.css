@@ -1,0 +1,39 @@
+.buttonContainerFav {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  height: 100px;
+  width: 80%;
+  margin: auto;
+  padding: 50px;
+}
+
+.cardFavorite {
+  background-color: antiquewhite;
+  display: flex;
+  margin-top: 25px;
+}
+
+.cardFavorite section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.favoriteCardInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardFavorite h2 {
+  font-size: 18px;
+}
+
+.btnFav {
+  display: flex;
+  gap: 10px;
+
+}

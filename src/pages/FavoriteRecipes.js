@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import FavoriteRecipeMeals from '../components/FavoriteRecipeMeals';
 import FavoriteRecipeDrinks from '../components/FavoriteRecipeDrinks';
+import './favorite.css';
 
 const FAVORITE_RECIPES = 'favoriteRecipes';
 
@@ -30,34 +31,40 @@ function FavoritesRecipes() {
   return (
     <>
       <Header />
-      <button
-        data-testid="filter-by-meal-btn"
-        onClick={ (event) => handleClick(event) }
-      >
-        Meals
-
-      </button>
-      <button
-        data-testid="filter-by-drink-btn"
-        onClick={ (event) => handleClick(event) }
-      >
-        Drinks
-
-      </button>
-      <button
-        data-testid="filter-by-all-btn"
-        onClick={ (event) => handleClick(event) }
-      >
-        All
-
-      </button>
+      <div className="buttonContainerFav">
+        <button
+          className="btn btn-outline-warning"
+          data-testid="filter-by-meal-btn"
+          onClick={ (event) => handleClick(event) }
+        >
+          Meals
+        </button>
+        <button
+          className="btn btn-outline-warning"
+          data-testid="filter-by-drink-btn"
+          onClick={ (event) => handleClick(event) }
+        >
+          Drinks
+        </button>
+        <button
+          className="btn btn-outline-warning"
+          data-testid="filter-by-all-btn"
+          onClick={ (event) => handleClick(event) }
+        >
+          All
+        </button>
+      </div>
       {dataFiltered && dataFiltered.map((recipe, index) => {
         if (recipe.type === 'meal') {
-          return (<FavoriteRecipeMeals
-            recipe={ recipe }
-            index={ index }
-            key={ recipe.id }
-          />);
+          return (
+            <div key={ recipe.id } className="cardFavorite">
+              <FavoriteRecipeMeals
+                recipe={ recipe }
+                index={ index }
+                key={ recipe.id }
+              />
+            </div>
+          );
         }
         return (<FavoriteRecipeDrinks
           recipe={ recipe }
