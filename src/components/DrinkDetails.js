@@ -60,13 +60,14 @@ function DrinkDetails() {
             {recipeDrink.strAlcoholic}
 
           </p>
-          <p
-            data-testid="instructions"
-            className="recipe-intructions"
-          >
-            {recipeDrink.strInstructions}
+          <div className="recipe-intructions">
+            <p
+              data-testid="instructions"
+            >
+              {recipeDrink.strInstructions}
+            </p>
 
-          </p>
+          </div>
           {
             mapToFilterIngredients.map((ingredient, index) => (
               <p
@@ -89,38 +90,37 @@ function DrinkDetails() {
             src={ recipeDrink.strVideo.replace('/watch?v=', '/embed/') }
           />}
           <section className="recomendations">
-            {dataMeals.map((item, index) => {
-              if (index < RECOMENDATIONS_QUANTITY) {
-                return (
-                  <a
-                    href={ `/drinks/${item.idMeal}` }
-                    key={ item.idMeal }
-                    data-testid={ `${index}-recommendation-card` }
-                  >
-                    <div className="recomendationsCard">
-                      <p
-                        data-testid={ `${index}-recommendation-title` }
-                      >
-                        {item.strMeal}
-                      </p>
+            {dataMeals.map((item, index) => index < RECOMENDATIONS_QUANTITY
+              && (
+                <a
+                  href={ `/drinks/${item.idMeal}}` }
+                  key={ item.idMeal }
+                  data-testid={ `${index}-recommendation-card` }
+                >
+                  <div className="recomendationsCard">
+                    <div className="recomendationsCardImage">
                       <img
                         src={ item.strMealThumb }
                         width="100px"
-                        alt={ item.strMeal }
+                        alt={ item.strDrink }
                         data-testid={ `${index}-card-img` }
                       />
                     </div>
-                  </a>
-                );
-              }
-              return console.log('');
-            })}
+                    <div className="recomendationsCardName">
+                      <h6
+                        data-testid={ `${index}-recommendation-title` }
+                      >
+                        {item.strMeal}
+                      </h6>
+                    </div>
+                  </div>
+                </a>))}
           </section>
 
           <section className="button-container">
             <button
               data-testid="start-recipe-btn"
-              className="startRecipe"
+              className="startRecipe btn btn-warning"
               onClick={ () => {
                 const idPage = location.pathname.split('/')[2];
                 history.push(`/drinks/${idPage}/in-progress`);

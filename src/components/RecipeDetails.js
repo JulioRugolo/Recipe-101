@@ -9,7 +9,7 @@ function RecipeDetails() {
   const mealsPage = location.pathname.split('/')[1];
 
   return (
-    <div className="recipeDetails">
+    <div className="recipeDetailsContainer">
       {mealsPage === 'meals' ? <MealDetails /> : <DrinkDetails /> }
     </div>
   );

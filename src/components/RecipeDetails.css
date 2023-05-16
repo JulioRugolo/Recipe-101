@@ -1,8 +1,17 @@
+.recipeDetailsContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100vh;
+}
 .recipe-details {
   align-items: center;
   display: flex;
   flex-direction: column;
   text-align:justify;
+  min-height: 100vh;
 }
 
 .recipe-details img {
@@ -21,8 +30,12 @@
 }
 
 .recipe-intructions {
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-size: 22px;
-  margin: 20px 15px 25px;
+  width: 90%;
+  margin-bottom: 20px;
 }
 
 .recipe-ingredient {
@@ -34,15 +47,56 @@
 
 iframe {
   margin: 50px;
+  width: 100%;
+}
+
+
+.recomendations {
+  margin-bottom: 100px;
+  max-width: 390px;
+  display: flex;
+  gap: 10px;
+  overflow: auto;
+  text-align: center;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+
+.recomendationsCard {
+  background-color: #BC3C0D;
+  color: white;
+  width: 100%;
+  border-radius: 20px 20px 0 0 ;
+}
+
+.recomendationsCardName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  text-align: center;
+}
+
+.recomendationsCardImage img {
+  width: 95px;
+  border-radius: 20px 20px 0 0;
 }
 
 .button-container {
   display: flex;
   justify-content: space-around;
-  margin-top: 50px;
- width: 100%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #BC3C0D;
+  height: 70px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.recomendations {
-  margin-top: 40px;
+.startRecipe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
 }

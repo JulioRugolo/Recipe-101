@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 87vh;
     gap: 50px;
     background-color: #BC3C0D;
 }
@@ -12,10 +12,12 @@
     display: flex;
     max-width: 100vh;
     max-height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo img {
-    width: 100%;
+    width: 70%;
 }
 
 .formLogin {
@@ -61,4 +63,5 @@
 
 .submitBtn:disabled {
     background-color: white;
+    color: darkgrey;
 }

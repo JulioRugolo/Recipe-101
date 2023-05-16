@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   width: 390px;
+  margin-bottom: 60px;
 }
 
 .cardContainer {
@@ -39,7 +40,6 @@
 
 .recipeInfo {
   justify-self:flex-end;
-  background-color: aqua;
   padding-top: 10px;
   padding-left: 10px;
   height: 100%;
@@ -57,24 +57,6 @@
 a {
   color: inherit;
   text-decoration: none;
-}
-
-.recomendations {
-  display: flex;
-  gap: 10px;
-  overflow: auto;
-  text-align: center;
-  white-space: nowrap;
-  width: 200px;
-}
-
-.recomendationsCard {
-  background-color: antiquewhite;
-  width: 95px;
-}
-
-.recomendationsCard img {
-  width: 95px;
 }
 
 .noDisplay {

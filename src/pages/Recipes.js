@@ -78,7 +78,18 @@ function Recipes(props) {
                       </div>
                       <div className="recipeInfo">
                         <h3 data-testid={ `${index}-card-name` }>{meal.strMeal}</h3>
+                        <span>
+                          Category:
+                          {' '}
+                          {meal.strCategory}
+                        </span>
                         <p>{meal.strInstructions}</p>
+                        <p>
+                          Time to prepare:
+                          {' '}
+                          {parseInt(Math.random() * 50, 10) + 5}
+                          m
+                        </p>
                       </div>
                     </div>
                   </a>

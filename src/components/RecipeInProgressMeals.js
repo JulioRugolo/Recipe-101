@@ -11,7 +11,7 @@ import './RecipeInProgress.css';
 
 function RecipeInProgressMeals() {
   const location = useLocation();
-  const { copyId } = useContext(AppContext);
+  const { copyId, setCopyId } = useContext(AppContext);
   const [recipe, setRecipe] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [id, setId] = useState('');
@@ -59,11 +59,22 @@ function RecipeInProgressMeals() {
             />
           ))}
         </section>
-        {copyId && <p>Link copied!</p>}
-        <ShareButton id={ id } type="meals" />
-        <FavoriteButton recipe={ recipeButton } />
-        <p data-testid="instructions">{recipeDetail.strInstructions}</p>
-        <ButtonValidator numberOfCheckbox={ ingredients.length } recipe={ recipe[0] } />
+        <div className="recipe-intructionsInProgress">
+          <p data-testid="instructions">{recipeDetail.strInstructions}</p>
+        </div>
+        {copyId
+          && (
+            <div className="linkShare">
+              <p>Link copied!</p>
+              <button onClick={ () => setCopyId(false) }>X</button>
+            </div>
+          )}
+
+        <section className="button-container">
+          <ButtonValidator numberOfCheckbox={ ingredients.length } recipe={ recipe[0] } />
+          <ShareButton id={ id } type="meals" />
+          <FavoriteButton recipe={ recipeButton } />
+        </section>
       </div>
     ))
 

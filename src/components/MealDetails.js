@@ -63,13 +63,14 @@ function MealDetails() {
             {recipeMeal.strCategory}
 
           </p>
-          <p
-            data-testid="instructions"
-            className="recipe-intructions"
-          >
-            {recipeMeal.strInstructions}
+          <div className="recipe-intructions">
+            <p
+              data-testid="instructions"
+            >
+              {recipeMeal.strInstructions}
+            </p>
 
-          </p>
+          </div>
           {
             mapToFilterIngredients.map((ingredient, index) => (
               <p
@@ -100,33 +101,7 @@ function MealDetails() {
                   data-testid={ `${index}-recommendation-card` }
                 >
                   <div className="recomendationsCard">
-                    <p
-                      data-testid={ `${index}-recommendation-title` }
-                    >
-                      {item.strDrink}
-                    </p>
-                    <img
-                      src={ item.strDrinkThumb }
-                      width="100px"
-                      alt={ item.strDrink }
-                      data-testid={ `${index}-card-img` }
-                    />
-                  </div>
-                </a>))}
-            {/* {dataDrinks.map((item, index) => {
-              if (index < RECOMENDATIONS_QUANTITY) {
-                return (
-                  <a
-                    href={ `/drinks/${item.idDrink}}` }
-                    key={ item.idDrink }
-                    data-testid={ `${index}-recommendation-card` }
-                  >
-                    <div className="recomendationsCard">
-                      <p
-                        data-testid={ `${index}-recommendation-title` }
-                      >
-                        {item.strDrink}
-                      </p>
+                    <div className="recomendationsCardImage">
                       <img
                         src={ item.strDrinkThumb }
                         width="100px"
@@ -134,10 +109,15 @@ function MealDetails() {
                         data-testid={ `${index}-card-img` }
                       />
                     </div>
-                  </a>
-                );
-              }
-            })} */}
+                    <div className="recomendationsCardName">
+                      <h6
+                        data-testid={ `${index}-recommendation-title` }
+                      >
+                        {item.strDrink}
+                      </h6>
+                    </div>
+                  </div>
+                </a>))}
           </section>
 
           <section className="button-container">
