@@ -63,14 +63,19 @@ function MealDetails() {
             {recipeMeal.strCategory}
 
           </p>
-          <div className="recipe-intructions">
-            <p
-              data-testid="instructions"
-            >
-              {recipeMeal.strInstructions}
-            </p>
+          <section className="instructionsContainer">
 
-          </div>
+            <h3>Instructions</h3>
+            <div className="recipe-intructions">
+              <p
+                data-testid="instructions"
+              >
+                {recipeMeal.strInstructions}
+              </p>
+
+            </div>
+          </section>
+          <h3>Ingredients</h3>
           {
             mapToFilterIngredients.map((ingredient, index) => (
               <p

@@ -30,7 +30,7 @@
 }
 
 .recipe-intructions {
-  max-height: 500px;
+  max-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
   font-size: 22px;
@@ -99,4 +99,11 @@ iframe {
   justify-content: center;
   align-items: center;
   border-radius: 20px;
+}
+.instructionsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
 }
