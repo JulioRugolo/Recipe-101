@@ -1,23 +1,21 @@
+
 .loginPage {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 87vh;
-    gap: 50px;
     background-color: #BC3C0D;
+    min-height: 665px;
 }
 
 .logo {
     display: flex;
-    max-width: 100vh;
-    max-height: 100vh;
     justify-content: center;
     align-items: center;
 }
 
 .logo img {
-    width: 70%;
+    width: 60%;
 }
 
 .formLogin {

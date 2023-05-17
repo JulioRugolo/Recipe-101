@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import DoneRecipeMeals from '../components/DoneRecipeMeals';
 import DoneRecipeDrinks from '../components/DoneRecipeDrinks';
+import '../components/doneRecipe.css';
 
 function DoneRecipePage() {
   const { setTitle, setFavoriteOrProfile } = useContext(AppContext);
@@ -27,30 +28,36 @@ function DoneRecipePage() {
   return (
     <>
       <Header />
-      <button
-        data-testid="filter-by-meal-btn"
-        onClick={ (event) => handleClick(event) }
-      >
-        Meals
-
-      </button>
-      <button
-        data-testid="filter-by-drink-btn"
-        onClick={ (event) => handleClick(event) }
-      >
-        Drinks
-
-      </button>
-      <button
-        data-testid="filter-by-all-btn"
-        onClick={ (event) => handleClick(event) }
-      >
-        All
-
-      </button>
+      <div className="buttonContainerFav">
+        <button
+          className="btn btn-outline-warning"
+          data-testid="filter-by-meal-btn"
+          onClick={ (event) => handleClick(event) }
+        >
+          Meals
+        </button>
+        <button
+          className="btn btn-outline-warning"
+          data-testid="filter-by-drink-btn"
+          onClick={ (event) => handleClick(event) }
+        >
+          Drinks
+        </button>
+        <button
+          className="btn btn-outline-warning"
+          data-testid="filter-by-all-btn"
+          onClick={ (event) => handleClick(event) }
+        >
+          All
+        </button>
+      </div>
       {dataFiltered && dataFiltered.map((recipe, index) => {
         if (recipe.type === 'meal') {
-          return <DoneRecipeMeals recipe={ recipe } index={ index } key={ recipe.id } />;
+          return (
+            <div key={ recipe.id } className="cardDone">
+              <DoneRecipeMeals recipe={ recipe } index={ index } key={ recipe.id } />
+            </div>
+          );
         }
         return <DoneRecipeDrinks recipe={ recipe } index={ index } key={ recipe.id } />;
       })}

@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
@@ -39,8 +40,11 @@ function DrinkDetails() {
       const objectEntries = Object.entries(recipeDrink);
       const mapToFilterMeasures = objectEntries
         .filter((entrie) => entrie[0].includes('strMeasure'))
-        .filter((ingredient) => ingredient[1]
-        !== null && `${ingredient[0]}:${ingredient[1]}`);
+        .filter((ingredient) => {
+          if (ingredient[1] !== null) {
+            return `${ingredient[0]}:${ingredient[1]}`;
+          }
+        });
       const mapToFilterIngredients = objectEntries
         .filter((entrie) => entrie[0].includes('strIngredient'))
         .filter((ingredient) => ingredient[1]

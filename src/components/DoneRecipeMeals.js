@@ -9,7 +9,7 @@ function DoneRecipeMeals(props) {
   const { recipe, index } = props;
   const { copyId } = useContext(AppContext);
   return (
-    <section key={ recipe.id }>
+    <section key={ recipe.id } className="doneCardContainer">
       <a href={ `http://localhost:3000/meals/${recipe.id}` }>
         <img
           src={ recipe.image }
@@ -18,31 +18,37 @@ function DoneRecipeMeals(props) {
           width="200px"
         />
       </a>
-      <a href={ `http://localhost:3000/meals/${recipe.id}` }>
-        <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
-      </a>
-      <h2
-        data-testid={ `${index}-horizontal-top-text` }
-      >
-        {`${recipe.nationality} - ${recipe.category}`}
+      <div className="doneRecipeInfo">
 
-      </h2>
-      <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
-      {recipe.tags.map((tag, indexT) => (
-        <span
-          key={ indexT }
-          data-testid={ `${index}-${tag}-horizontal-tag` }
-        >
-          {tag}
+        <a href={ `http://localhost:3000/meals/${recipe.id}` }>
+          <h2>{recipe.name}</h2>
+        </a>
+        <div>
+          <h4>{`${recipe.nationality} - ${recipe.category}`}</h4>
+        </div>
+        <div>
+          <p>{recipe.doneDate}</p>
+        </div>
+        <div className="tags">
+          {recipe.tags.map((tag, indexT) => (
+            <span
+              key={ indexT }
+              data-testid={ `${index}-${tag}-horizontal-tag` }
+            >
+              {indexT + 1 < recipe.tags.length ? `${tag}, ` : tag}
 
-        </span>
-      ))}
-      {copyId && <p>Link copied!</p>}
-      <ShareButton
-        id={ recipe.id }
-        testId={ `${index}-horizontal-share-btn` }
-        type="meals"
-      />
+            </span>
+          ))}
+        </div>
+        <div className="shareContainer">
+          <ShareButton
+            id={ recipe.id }
+            testId={ `${index}-horizontal-share-btn` }
+            type="meals"
+          />
+          {copyId && <p>Link copied!</p>}
+        </div>
+      </div>
     </section>
   );
 }

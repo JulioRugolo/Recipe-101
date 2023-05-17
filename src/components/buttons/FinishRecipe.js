@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import date from 'date-and-time';
 import AppContext from '../../context/AppContext';
 
 function ButtonValidator(props) {
@@ -21,6 +22,8 @@ function ButtonValidator(props) {
 
   const handleClick = () => {
     const dateNow = new Date();
+    const pattern = date.compile('ddd, MMM DD YYYY');
+    const time = date.format(dateNow, pattern);
     const recipeToSave = {
       id: mealsPage === 'meals' ? recipe.idMeal : recipe.idDrink,
       nationality: recipe.strArea === undefined ? '' : recipe.strArea,
@@ -30,9 +33,8 @@ function ButtonValidator(props) {
       tags: recipe.strTags === null ? [] : recipe.strTags.split(','),
       alcoholicOrNot: mealsPage === 'drinks' ? 'Alcoholic' : '',
       type: mealsPage === 'meals' ? 'meal' : 'drink',
-      doneDate: dateNow.toISOString(),
+      doneDate: time,
     };
-    console.log(recipeToSave);
 
     if (retrieveLocal) {
       localStorage.setItem(

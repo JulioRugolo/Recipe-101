@@ -66,11 +66,15 @@ function FavoritesRecipes() {
             </div>
           );
         }
-        return (<FavoriteRecipeDrinks
-          recipe={ recipe }
-          index={ index }
-          key={ recipe.id }
-        />);
+        return (
+          <div key={ recipe.id } className="cardFavorite">
+            <FavoriteRecipeDrinks
+              recipe={ recipe }
+              index={ index }
+              key={ recipe.id }
+            />
+          </div>
+        );
       })}
     </>
   );

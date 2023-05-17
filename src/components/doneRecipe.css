@@ -1,0 +1,36 @@
+  .doneCardContainer {
+    display: flex;
+    background-color: antiquewhite;
+    display: flex;
+    margin-top: 25px;
+  }
+
+  .doneRecipeInfo {
+    padding-left: 10px;
+  }
+
+  .doneRecipeInfo p  {
+    margin: 0;
+    margin-top: 10px;
+  }
+
+  .tags {
+    margin: 0;
+    margin-top: 10px;
+  }
+
+  .shareContainer {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  h2 {
+    font-weight: 800;
+    color: #BC3C0D;
+  }
+
+  h4 {
+    font-weight: 400;
+  }

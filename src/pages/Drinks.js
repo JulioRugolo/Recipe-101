@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+/* eslint-disable array-callback-return */
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
@@ -58,7 +60,7 @@ function Drinks(props) {
                 history.push(`/drinks/${dataDrinks[0].idDrink}`);
               } else if (index < VALIDATE_ARRAY) {
                 return (
-                  <a href={ `/meals/${drink.idDrink}` } key={ drink.idDrink }>
+                  <a href={ `/drinks/${drink.idDrink}` } key={ drink.idDrink }>
                     <div
                       data-testid={ `${index}-recipe-card` }
                       className="recipeCard"
