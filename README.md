@@ -1,10 +1,18 @@
-# Boas-vindas ao repositório do projeto App de Receitas(Recipe 101)!
+# Welcome to Recipe 101 Project!
+
+## Readme em português
+<details><summary><b>Portugês</b></summary><br/>
+Boas-vindas ao repositório do projeto App de Receitas(Recipe 101)!
 
 Nesse projeto, desenvolvi em grupo, um App de receitas, que chegamos ao nome Recipe 101!
 
 # Sobre o desenvolvimento
 
 Nesse projeto utilizamos React com componente funcionais, Hooks, ContextAPI e RTL.
+
+# Como rodar o projeto
+
+Para rodar nossa aplicação basta clonar este repositório e rodar o comando npm start.
 
 # APIs
 
@@ -20,7 +28,6 @@ Nesse projeto utilizamos React com componente funcionais, Hooks, ContextAPI e RT
 
     Os end-points também são bastante ricos, você pode [vê-los aqui](https://www.thecocktaildb.com/api.php)
     </details>
-</details>
 
 # Requisitos
 
@@ -186,3 +193,205 @@ Nesse projeto utilizamos React com componente funcionais, Hooks, ContextAPI e RT
 #### 61 - Redirecione a pessoa usuária que, ao clicar no botão de "Favorite Recipes", a rota deve mudar para a tela de receitas favoritas
 
 #### 62 - Redirecione a pessoa usuária que ao clicar no botão de "Logout", o `localStorage` deve ser limpo e a rota deve mudar para a tela de login
+</details>
+
+---
+
+## Readme in English
+
+<details><summary><b>English</b></summary><br/>
+
+
+# Welcome to the Recipe App (Recipe 101) project repository!
+
+In this project, we developed a recipe app called Recipe 101 as a group.
+
+# About the development
+
+In this project, we used React with functional components, Hooks, Context API, and RTL (React Testing Library).
+
+# How to run the project
+
+To run our application, simply clone this repository and run the command `npm start`.
+
+# APIs
+
+* <details><summary><b>The MealDB</b></summary><br/>
+
+    [TheMealDB](https://www.themealdb.com/) is an open database, maintained by the community, with recipes and ingredients from around the world.
+
+    The API endpoints are quite rich, you can [see them here](https://www.themealdb.com/api.php).
+
+
+* <details><summary><b>The CockTailDB API</b></summary>
+    This API, maintained by the same organization as TheMealDB API, is focused on beverages.
+
+    The API endpoints are also quite rich, you can [see them here](https://www.thecocktaildb.com/api.php)
+    </details>
+
+# Requirements
+
+## Unit tests
+
+### 1 - Develop unit tests with a coverage of at least 90%
+<br />
+
+---
+
+## Login screen
+
+
+#### 2 - Create all elements that must respect the attributes described in the prototype for the login screen
+
+#### 3 - Develop the screen in a way that users can enter their email in the email input and their password in the password input
+
+#### 4 - Develop the screen in a way that the form is only valid after a valid email and a password with more than 6 characters are entered
+
+#### 5 - After submitting the form, save the user's email in localStorage with the key `user`
+
+#### 6 - Redirect the user to the main food recipe screen after successful login submission and validation
+---
+
+## Header
+
+#### 7 - Implement the header according to the requirements of each screen
+
+#### 8 - Redirect the user to the profile screen when the profile button is clicked
+
+#### 9 - Develop a search button that, when clicked, displays the search bar. The same button should hide the search bar when clicked again
+---
+
+## Search bar - Header
+
+#### 10 - Implement the search bar elements respecting the attributes described in the prototype
+
+#### 11 - Implement 3 radio buttons in the search bar: Ingredient, Name, and First letter
+
+#### 12 - Search the food API if the user is on the food page, and the drink API if they are on the drinks page
+
+#### 13 - Redirect to the recipe details screen if only one recipe is found, with the recipe ID in the URL
+
+#### 14 - If the search returns more than one recipe, render the first 12 recipes found, displaying the image and name of each one
+
+#### 15 - Display an alert message if no recipe is found
+---
+
+## Bottom Menu
+
+#### 16 - Implement the bottom menu, positioning it fixed and containing 2 icons: one for food and another for drinks
+
+#### 17 - Display the bottom menu only on the screens indicated by the prototype
+
+#### 18 - Redirect the user to the correct screen when each icon in the bottom menu is clicked
+---
+
+## Main Food Recipe Screen
+
+#### 19 - Load the first 12 food or drink recipes, one in each card
+
+#### 20 - Implement category buttons to be used as filters
+
+#### 21 - Implement the recipe filter by clicking on the category filter, using the API
+
+#### 22 - Implement the filter as a toggle, which, if selected again, the app should return the recipes without any filter.
+
+#### 23 - Redirect the user to the details screen when a recipe card is clicked, which should change the route and include the recipe ID in the URL.
+
+---
+
+## Recipe Details Screen
+
+#### 24 - Make a request to the API passing the recipe `id` that should be available in the URL parameters.
+
+#### 25 - Develop the screen to include an image of the recipe, the title, the category for food recipes, and whether it is alcoholic for drink recipes. It should also display a list of ingredients followed by their quantities, instructions, an embedded YouTube video, and recommendations.
+
+#### 26 - Implement the recommendations. For food recipes, the recommendation should be a drink, and for drink recipes, the recommendation should be food.
+
+#### 27 - Implement 6 recommendation cards, displaying only 2 at a time. The scroll should be horizontal, similar to a carousel.
+
+#### 28 - Develop a button named "Start Recipe" that should be fixed at the bottom of the screen at all times.
+
+#### 29 - Implement the solution so that if the recipe has already been made, the "Start Recipe" button disappears.
+
+#### 30 - Implement the solution so that if the recipe has been started but not finished, the text of the button should be "Continue Recipe".
+
+#### 31 - Redirect the user if the "Start Recipe" button is clicked, and the route should change to the in-progress recipe screen.
+
+#### 32 - Implement a share button and a favorite button for the recipe.
+
+#### 33 - Implement the solution so that when the share button is clicked, the recipe details link should be copied to the clipboard, and a message indicating that the link has been copied should appear on the screen in an HTML tag.
+
+#### 34 - Save favorite recipes in the `localStorage` under the key `favoriteRecipes`.
+
+#### 35 - Implement the heart icon (favorite) so that it appears filled if the recipe is favorited and empty otherwise.
+
+#### 36 - Implement the logic for the favorite button. When clicked, the heart icon should toggle its current state, filled if it's empty, and empty if it's filled.
+---
+
+## In-Progress Recipe Screen
+
+#### 37 - Develop the screen to include an image of the recipe, the title, the category for food recipes, and whether it is alcoholic for drink recipes. It should also display a list of ingredients with their respective quantities and instructions.
+
+#### 38 - Develop a checkbox for each ingredient in the list.
+
+#### 39 - Implement logic so that when a checkbox for an ingredient is clicked, the ingredient name should be "crossed out" in the list.
+
+#### 40 - Save the progress state, which should be maintained if the user refreshes the page or returns to the same recipe.
+
+#### 41 - Develop the logic for favorite and share buttons. The logic from the Recipe Details screen applies here.
+
+#### 42 - Implement the solution so that the "Finish Recipe" button is only enabled when all ingredients are checked.
+
+#### 43 - Redirect the user after clicking the "Finish Recipe" button to the page of completed recipes, with the route being `/done-recipes`.
+
+---
+
+## Done Recipes Screen
+
+#### 44 - Implement the elements of the Done Recipes screen respecting the attributes described in the prototype.
+
+#### 45 - Develop the screen so that if the recipe on the card is a food recipe, it should display: the recipe photo, name, category, nationality, the date the recipe was made, the first 2 tags returned by the API, and a share button.
+
+#### 46 - Develop the screen so that if the recipe on the card is a drink recipe
+
+, it should display: the recipe photo, name, whether it is alcoholic, the date the recipe was made, and a share button.
+
+#### 47 - Implement the solution so that the share button copies the URL of the recipe details screen to the clipboard.
+
+#### 48 - Implement 2 buttons that filter recipes by food or drink, and a third button that removes all filters.
+
+#### 49 - Redirect to the recipe details screen when the photo or name of the recipe is clicked.
+---
+
+## Favorite Recipes Screen
+
+#### 50 - Implement the elements of the Favorite Recipes screen (cumulative with the attributes shared with the Done Recipes screen), respecting the attributes described in the prototype.
+
+#### 51 - Develop the screen so that if the recipe on the card is a food recipe, it should display: the recipe photo, name, category, nationality, a share button, and an "unfavorite" button.
+
+#### 52 - Develop the screen so that if the recipe on the card is a drink recipe, it should display: the recipe photo, name, whether it is alcoholic or not, a share button, and an "unfavorite" button.
+
+#### 53 - Implement the solution so that the share button copies the URL of the recipe details screen to the clipboard.
+
+#### 54 - Implement the solution so that the "unfavorite" button removes the recipe from the favorite recipes list in the `localStorage` and from the screen.
+
+#### 55 - Implement 2 buttons that filter recipes by food or drink, and a third button that removes all filters.
+
+#### 56 - Redirect the user to the recipe details screen when the photo or name of the recipe is clicked.
+---
+
+## Profile Screen
+
+#### 57 - Implement the elements of the Profile screen respecting the attributes described in the prototype.
+
+#### 58 - Implement the solution so that the user's email address is visible.
+
+#### 59 - Implement 3 buttons: one named "Done Recipes", one named "Favorite Recipes", and one named "Logout".
+
+#### 60 - Redirect the user to the Done Recipes screen when the "Done Recipes" button is clicked.
+
+#### 61 - Redirect the user to the Favorite Recipes screen when the "Favorite Recipes" button is clicked.
+
+#### 62 - Clear the `localStorage` and change the route to the login screen when the "Logout" button is clicked.
+
+</details>
