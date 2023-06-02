@@ -1,7 +1,8 @@
 # Welcome to Recipe 101 Project!
+#### PS: This project is optmized <b>only</b> to iPhone 12 Pro!
 
 ## Readme em português
-<details><summary><b>Portugês</b></summary><br/>
+<details><summary><b>Português</b></summary><br/>
 Boas-vindas ao repositório do projeto App de Receitas(Recipe 101)!
 
 Nesse projeto, desenvolvi em grupo, um App de receitas, que chegamos ao nome Recipe 101!
