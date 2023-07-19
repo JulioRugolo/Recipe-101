@@ -139,7 +139,6 @@ function MealDetails() {
             </button>
             <ShareButton
               id={ id }
-              type="meals"
             />
             {copyId && <p>Link copied!</p>}
             <FavoriteButton recipe={ recipe } />

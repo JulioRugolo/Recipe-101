@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import FavoriteButton from './buttons/FavoriteButton';
 import ShareButton from './buttons/ShareButton';
-import AppContext from '../context/AppContext';
 import Checkbox from './buttons/Checkbox';
 import ButtonValidator from './buttons/FinishRecipe';
 
@@ -11,7 +10,6 @@ import './RecipeInProgress.css';
 
 function RecipeInProgressMeals() {
   const location = useLocation();
-  const { copyId, setCopyId } = useContext(AppContext);
   const [recipe, setRecipe] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [id, setId] = useState('');
@@ -62,17 +60,10 @@ function RecipeInProgressMeals() {
         <div className="recipe-intructionsInProgress">
           <p data-testid="instructions">{recipeDetail.strInstructions}</p>
         </div>
-        {copyId
-          && (
-            <div className="linkShare">
-              <p>Link copied!</p>
-              <button onClick={ () => setCopyId(false) }>X</button>
-            </div>
-          )}
 
         <section className="button-container">
           <ButtonValidator numberOfCheckbox={ ingredients.length } recipe={ recipe[0] } />
-          <ShareButton id={ id } type="meals" />
+          <ShareButton id={ id } />
           <FavoriteButton recipe={ recipeButton } />
         </section>
       </div>
